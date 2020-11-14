@@ -14,4 +14,8 @@ router
   .route('/reviews/:id')
   .get(controller.getSomeReviews)
 
+router
+  .route('/reviewStats/:id')
+  .get(controller.getSomeReviewStats)
+
 module.exports = router;

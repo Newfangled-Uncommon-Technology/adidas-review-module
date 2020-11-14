@@ -36,6 +36,15 @@ const controller = {
     .catch((err) => {
       res.status(400).send(err);
     })
+  },
+  getSomeReviewStats: (req, res) => {
+    list.getSomeReviewStats(req.params.id)
+    .then((results) => {
+      res.status(200).send(results);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
   }
 }
 
