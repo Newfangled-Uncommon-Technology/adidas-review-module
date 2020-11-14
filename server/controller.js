@@ -30,6 +30,7 @@ const controller = {
   },
   updateYes: (req, res) => {
     var theHolyString = `yesCount.${req.body.reviewId}`;
+    console.log(theHolyString);
     list.updateYes(req.params.id, theHolyString)
     .then(() => {
       res.status(200).send(`added to the yes counter of shoe ${req.params.id}, review ${req.body.reviewId}`)
@@ -39,9 +40,10 @@ const controller = {
     })
   },
   updateNo: (req, res) => {
-    list.updateNo(req.params.id)
+    var theHolyString = `noCount.${req.body.reviewId}`;
+    list.updateNo(req.params.id, theHolyString)
     .then(() => {
-      res.status(200).send(`added to the no counter of review ${req.params.id}`)
+      res.status(200).send(`added to the no counter of shoe ${req.params.id}, review ${req.body.reviewId}`)
     })
     .catch((err) => {
       res.status(400).send(err);
