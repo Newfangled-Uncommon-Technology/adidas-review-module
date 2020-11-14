@@ -24,6 +24,8 @@ const lorem = new LoremIpsum({
 var sampleReviews = {
   shoeIds: ['M20324', 'M20325', 'M20327'],
   reviewCount: 3,
+  reviewId: [],
+  username: [],
   title: [],
   text: [],
   yesCount: [],
@@ -37,6 +39,8 @@ var sampleReviews = {
 };
 
 for (var i = 0; i < sampleReviews.reviewCount; i++) {
+  sampleReviews.reviewId.push(i);
+  sampleReviews.username.push('Julian');
   sampleReviews.title.push(lorem.generateWords(1));
   sampleReviews.text.push(lorem.generateSentences(4));
   sampleReviews.yesCount.push(Math.floor(Math.random() * 5));
@@ -69,4 +73,4 @@ var sampleReviewStats = {
 }
 
 Reviews.create(sampleReviews);
-// ReviewStats.create(sampleReviewStats);
+ReviewStats.create(sampleReviewStats);

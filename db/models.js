@@ -8,9 +8,14 @@ const list = {
   deleteAllReviews: () => {
     return(reviewsDB.remove( {} ))
   },
-  // getReviewsById:
+  getSomeReviews: (id) => {
+    return(reviewsDB.find( {shoeIds: {$in: [id]}} ))
+  },
   getAllReviewStats: () => {
     return(reviewStatsDB.find( {} ))
+  },
+  getSomeReviewStats: (id) => {
+    return(reviewStatsDB.find( {shoeIds: {$in: [id]}} ))
   }
 };
 

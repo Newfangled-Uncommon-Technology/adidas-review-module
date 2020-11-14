@@ -19,6 +19,15 @@ const controller = {
       res.status(400).send(err);
     })
   },
+  getSomeReviews: (req, res) => {
+    list.getSomeReviews(req.params.id)
+    .then((results) => {
+      res.status(200).send(results);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
+  },
   getAllReviewStats: (req, res) => {
     list.getAllReviewStats()
     .then((results) => {

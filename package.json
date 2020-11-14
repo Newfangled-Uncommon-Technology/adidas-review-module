@@ -8,7 +8,8 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "seed": "node db/insertSeeds.js"
   },
   "dependencies": {
     "axios": "^0.21.0",

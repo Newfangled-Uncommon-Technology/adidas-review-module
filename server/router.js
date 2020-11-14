@@ -10,4 +10,8 @@ router
   .route('/allReviewStats')
   .get(controller.getAllReviewStats)
 
+router
+  .route('/reviews/:id')
+  .get(controller.getSomeReviews)
+
 module.exports = router;

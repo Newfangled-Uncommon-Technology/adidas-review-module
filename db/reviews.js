@@ -8,8 +8,10 @@ const db = mongoose.connect(mongooseURI)
 
 const reviewsSchema = mongoose.Schema({
   shoeIds: [String],
-  reviewIds: [String],
-  titles: [String],
+  reviewCount: Number,
+  reviewId: [Number],
+  username: [String],
+  title: [String],
   text: [String],
   yesCount: [Number],
   noCount: [Number],
