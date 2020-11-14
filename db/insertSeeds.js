@@ -23,7 +23,7 @@ const lorem = new LoremIpsum({
 
 var sampleReviews = {
   shoeIds: ['M20324', 'M20325', 'M20327'],
-  reviewCount: 3,
+  reviewCount: 100,
   reviewId: [],
   username: [],
   title: [],
@@ -39,13 +39,15 @@ var sampleReviews = {
 };
 
 for (var i = 0; i < sampleReviews.reviewCount; i++) {
+  var month = Math.ceil(Math.random() * 10);
+  var day = Math.ceil(Math.random() * 28);
   sampleReviews.reviewId.push(i);
   sampleReviews.username.push('Julian');
   sampleReviews.title.push(lorem.generateWords(1));
   sampleReviews.text.push(lorem.generateSentences(4));
   sampleReviews.yesCount.push(Math.floor(Math.random() * 5));
   sampleReviews.noCount.push(Math.floor(Math.random() * 5));
-  sampleReviews.date.push(`11/${i}/2020`);
+  sampleReviews.date.push(`${month}/${day}/2020`);
   sampleReviews.starRating.push(Math.ceil(Math.random() * 5));
   sampleReviews.sizeRating.push(Math.ceil(Math.random() * 10));
   sampleReviews.widthRating.push(Math.ceil(Math.random() * 10));
@@ -57,7 +59,7 @@ var averageRating = Math.random() * 5;
 
 var sampleReviewStats = {
   shoeIds: ['M20324', 'M20325', 'M20327'],
-  reviewCount: 3,
+  reviewCount: 100,
   averageRating: averageRating,
   averageStar: Math.round(averageRating),
   fiveStar: Math.floor(Math.random() * 2),

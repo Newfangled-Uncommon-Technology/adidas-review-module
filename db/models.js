@@ -20,6 +20,9 @@ const list = {
   getAllReviewStats: () => {
     return(reviewStatsDB.find( {} ))
   },
+  deleteAllReviewStats: () => {
+    return(reviewStatsDB.remove( {} ))
+  },
   getSomeReviewStats: (id) => {
     return(reviewStatsDB.find( {shoeIds: {$in: [id]}} ))
   }

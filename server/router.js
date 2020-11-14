@@ -9,6 +9,7 @@ router
 router
   .route('/allReviewStats')
   .get(controller.getAllReviewStats)
+  .delete(controller.deleteAllReviewStats)
 
 router
   .route('/reviews/:id')
