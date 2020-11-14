@@ -28,6 +28,25 @@ const controller = {
       res.status(400).send(err);
     })
   },
+  updateYes: (req, res) => {
+    var theHolyString = `yesCount.${req.body.reviewId}`;
+    list.updateYes(req.params.id, theHolyString)
+    .then(() => {
+      res.status(200).send(`added to the yes counter of shoe ${req.params.id}, review ${req.body.reviewId}`)
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
+  },
+  updateNo: (req, res) => {
+    list.updateNo(req.params.id)
+    .then(() => {
+      res.status(200).send(`added to the no counter of review ${req.params.id}`)
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
+  },
   getAllReviewStats: (req, res) => {
     list.getAllReviewStats()
     .then((results) => {

@@ -15,6 +15,14 @@ router
   .get(controller.getSomeReviews)
 
 router
+  .route('/reviews/yes/:id')
+  .put(controller.updateYes)
+
+router
+  .route('/reviews/no/:id')
+  .put(controller.updateNo)
+
+router
   .route('/reviewStats/:id')
   .get(controller.getSomeReviewStats)
 
