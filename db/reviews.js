@@ -7,7 +7,7 @@ const db = mongoose.connect(mongooseURI)
 .then(() => console.log('connected to mongo'));
 
 const reviewsSchema = mongoose.Schema({
-  shoeIds: [Number],
+  shoeIds: [String],
   reviewIds: [String],
   titles: [String],
   text: [String],

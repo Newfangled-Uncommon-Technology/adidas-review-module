@@ -5,6 +5,9 @@ const list = {
   getAllReviews: () => {
     return(reviewsDB.find( {} ))
   },
+  deleteAllReviews: () => {
+    return(reviewsDB.remove( {} ))
+  },
   // getReviewsById:
   getAllReviewStats: () => {
     return(reviewStatsDB.find( {} ))

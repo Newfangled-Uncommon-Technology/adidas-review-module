@@ -10,6 +10,15 @@ const controller = {
       res.status(400).send(err);
     })
   },
+  deleteAllReviews: (req, res) => {
+    list.deleteAllReviews()
+    .then((results) => {
+      res.status(200).send(results);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
+  },
   getAllReviewStats: (req, res) => {
     list.getAllReviewStats()
     .then((results) => {

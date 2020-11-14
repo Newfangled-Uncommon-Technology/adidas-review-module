@@ -4,6 +4,7 @@ const controller = require('./controller.js');
 router
   .route('/allReviews')
   .get(controller.getAllReviews)
+  .delete(controller.deleteAllReviews)
 
 router
   .route('/allReviewStats')
