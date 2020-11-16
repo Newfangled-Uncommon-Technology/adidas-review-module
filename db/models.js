@@ -11,11 +11,11 @@ const list = {
   getSomeReviews: (id) => {
     return(reviewsDB.find( {shoeIds: {$in: [id]}} ))
   },
-  updateYes: (id, theHolyString) => {
-    return(reviewsDB.findOneAndUpdate({shoeIds: {$in: [id]}}, {$inc: {[theHolyString]: 1}}))
+  updateYes: (id, theHolyString, increment) => {
+    return(reviewsDB.findOneAndUpdate({shoeIds: {$in: [id]}}, {$inc: {[theHolyString]: increment}}))
   },
-  updateNo: (id, theHolyString) => {
-    return(reviewsDB.findOneAndUpdate({shoeIds: {$in: [id]}}, {$inc: {[theHolyString]: 1}}))
+  updateNo: (id, theHolyString, increment) => {
+    return(reviewsDB.findOneAndUpdate({shoeIds: {$in: [id]}}, {$inc: {[theHolyString]: increment}}))
   },
   getAllReviewStats: () => {
     return(reviewStatsDB.find( {} ))

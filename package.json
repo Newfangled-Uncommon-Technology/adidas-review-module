@@ -13,9 +13,11 @@
     "test": "jest --forceExit"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "preset": "@shelf/jest-mongodb"
   },
   "dependencies": {
+    "@shelf/jest-mongodb": "^1.2.3",
     "axios": "^0.21.0",
     "env-cmd": "^8.0.2",
     "express": "^4.17.1",
