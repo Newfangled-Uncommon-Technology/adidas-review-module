@@ -30,7 +30,6 @@ const controller = {
   },
   updateYes: (req, res) => {
     var theHolyString = `yesCount.${req.body.reviewId}`;
-    console.log(theHolyString);
     list.updateYes(req.params.id, theHolyString, req.body.increment)
     .then((results) => {
       res.status(200).send(`added to the yes counter of shoe ${req.params.id}, review ${req.body.reviewId}. New value is ${results.yesCount[req.body.reviewId]}`)
