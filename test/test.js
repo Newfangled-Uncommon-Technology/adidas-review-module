@@ -51,13 +51,13 @@ it('Should increment the yes count of a review', async done => {
 })
 
 it('Should increment the no count of a review', async done => {
-  var initialno;
-  var postno;
+  var initialNo;
+  var postNo;
   var noWorks;
 
   await request(server).get('/api/reviews/M20324')
   .then(response => {
-    initialno = response.body[0].noCount[0]
+    initialNo = response.body[0].noCount[0]
   })
 
   await request(server).put('/api/reviews/no/M20324')
@@ -68,11 +68,11 @@ it('Should increment the no count of a review', async done => {
 
   await request(server).get('/api/reviews/M20324')
   .then(response => {
-    postno = response.body[0].noCount[0]
+    postNo = response.body[0].noCount[0]
   })
 
   .then(() => {
-    noWorks = (postno === (initialno + 1))
+    noWorks = (postNo === (initialNo + 1))
     console.log(noWorks)
   })
 
