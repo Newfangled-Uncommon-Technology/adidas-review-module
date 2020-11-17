@@ -9,7 +9,19 @@ export default class App extends React.Component{
       reviews: [],
       reviewStats: [],
       reviewCount: 0,
-      showCount: 2
+      reviewId: [],
+      username: [],
+      title: [],
+      text: [],
+      yesCount: [],
+      noCount: [],
+      date: [],
+      starRating: [],
+      sizeRating: [],
+      widthRating: [],
+      comfortRating: [],
+      qualityRating: [],
+      showCount: ['one', 'two']
     }
 
     this.getReviewStats = this.getReviewStats.bind(this);
@@ -24,9 +36,20 @@ export default class App extends React.Component{
     .then((results) => {
       this.setState({
         reviews: results.data[0],
-        reviewCount: results.data[0].reviewCount
+        reviewCount: results.data[0].reviewCount,
+        reviewId: results.data[0].reviewId,
+        username: results.data[0].username,
+        title: results.data[0].title,
+        text: results.data[0].text,
+        yesCount: results.data[0].yesCount,
+        noCount: results.data[0].noCount,
+        date: results.data[0].date,
+        starRating: results.data[0].starRating,
+        sizeRating: results.data[0].sizeRating,
+        widthRating: results.data[0].widthRating,
+        comfortRating: results.data[0].comfortRating,
+        qualityRating: results.data[0].qualityRating
       });
-      console.log(this.state.reviews);
     })
     .catch((err) => {
       console.error(err);
@@ -40,7 +63,13 @@ export default class App extends React.Component{
       )
     } else {
       return (
-        <div>{this.state.reviewCount}</div>
+        <ul className="groceries">
+          {this.state.showCount.map((ignore, index) => {
+            return (
+              <div key={index}>{this.state.reviewId[index]}</div>
+            )
+          })}
+      </ul>
       )
     }
   }
