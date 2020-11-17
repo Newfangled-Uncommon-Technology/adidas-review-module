@@ -39,6 +39,7 @@ export default class App extends React.Component{
     this.sortBy3 = this.sortBy3.bind(this);
     this.sortBy2 = this.sortBy2.bind(this);
     this.sortBy1 = this.sortBy1.bind(this);
+    this.determineSort = this.determineSort.bind(this);
   }
 
   componentDidMount() {
@@ -210,15 +211,7 @@ export default class App extends React.Component{
       this.setState({
         currentStars: [5],
         sortingByStars: true
-      }, () => {
-        if (this.state.currentSort === 'newest') {
-          this.sortByNewest();
-        } else if (this.state.currentSort === 'helpful') {
-          this.sortByHelpful();
-        } else {
-          this.sortByRelevance();
-        }
-      });
+      }, () => {this.determineSort()});
     } else {
       var currentStars = this.state.currentStars;
       var found = false;
@@ -234,15 +227,7 @@ export default class App extends React.Component{
         currentStars.push(5);
         this.setState({
           currentStars: currentStars
-        }, () => {
-          if (this.state.currentSort === 'newest') {
-            this.sortByNewest();
-          } else if (this.state.currentSort === 'helpful') {
-            this.sortByHelpful();
-          } else {
-            this.sortByRelevance();
-          }
-        });
+        }, () => {this.determineSort()});
       }
     }
 
@@ -262,6 +247,17 @@ export default class App extends React.Component{
 
   sortBy1() {
 
+  }
+
+  determineSort() {
+    console.log('insinde determineSort')
+    if (this.state.currentSort === 'newest') {
+      this.sortByNewest();
+    } else if (this.state.currentSort === 'helpful') {
+      this.sortByHelpful();
+    } else {
+      this.sortByRelevance();
+    }
   }
 
   render() {
