@@ -28,6 +28,7 @@ export default class App extends React.Component{
 
     this.getReviews = this.getReviews.bind(this);
     this.getReviewStats = this.getReviewStats.bind(this);
+    this.sortByNewest = this.sortByNewest.bind(this);
   }
 
   componentDidMount() {
@@ -56,27 +57,8 @@ export default class App extends React.Component{
     })
   }
 
-  getReviews() {
-    axios.get('/api/reviews/M20324')
-    .then((results) => {
-      this.setState({
-        reviews: results.data[0],
-        reviewCount: results.data[0].reviewCount,
-        reviewId: results.data[0].reviewId,
-        username: results.data[0].username,
-        title: results.data[0].title,
-        text: results.data[0].text,
-        yesCount: results.data[0].yesCount,
-        noCount: results.data[0].noCount,
-        date: results.data[0].date,
-        starRating: results.data[0].starRating,
-        sizeRating: results.data[0].sizeRating,
-        widthRating: results.data[0].widthRating,
-        comfortRating: results.data[0].comfortRating,
-        qualityRating: results.data[0].qualityRating
-      });
-
-      var currentArray = [];
+  sortByNewest() {
+    var currentArray = [];
 
       for (var k = 0; k < this.state.showCount; k++) {
         var newestIndex = -1;
@@ -109,13 +91,34 @@ export default class App extends React.Component{
             }
           }
         }
-        console.log(newestIndex)
         currentArray.push(newestIndex)
       }
 
       this.setState({
         currentlyShowing: currentArray
       });
+  }
+
+  getReviews() {
+    axios.get('/api/reviews/M20324')
+    .then((results) => {
+      this.setState({
+        reviews: results.data[0],
+        reviewCount: results.data[0].reviewCount,
+        reviewId: results.data[0].reviewId,
+        username: results.data[0].username,
+        title: results.data[0].title,
+        text: results.data[0].text,
+        yesCount: results.data[0].yesCount,
+        noCount: results.data[0].noCount,
+        date: results.data[0].date,
+        starRating: results.data[0].starRating,
+        sizeRating: results.data[0].sizeRating,
+        widthRating: results.data[0].widthRating,
+        comfortRating: results.data[0].comfortRating,
+        qualityRating: results.data[0].qualityRating
+      });
+      this.sortByNewest();
     })
     .catch((err) => {
       console.error(err);
