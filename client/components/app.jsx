@@ -23,7 +23,9 @@ export default class App extends React.Component{
       comfortRating: [],
       qualityRating: [],
       showCount: 2,
-      currentlyShowing: []
+      currentlyShowing: [],
+      currentSort: 'date',
+      currentStars: [5, 4, 3, 2, 1]
     }
 
     this.getReviews = this.getReviews.bind(this);
@@ -67,7 +69,6 @@ export default class App extends React.Component{
 
         for (var i = 0; i < this.state.reviewCount; i++) {
 
-
           var found = false;
           for (var j = 0; j < currentArray.length; j++) {
             if (currentArray[j] === i) {
@@ -75,7 +76,14 @@ export default class App extends React.Component{
             }
           }
 
-          if (!found) {
+          var correctStarCount = false;
+          for (var j = 0; j < this.state.currentStars.length; j++) {
+            if (this.state.starRating[i] === this.state.currentStars[j]) {
+              correctStarCount = true;
+            }
+          }
+
+          if (!found && correctStarCount) {
             var currentDate = this.state.date[i].split('/');
             currentDate[0] = Number(currentDate[0]);
             currentDate[1] = Number(currentDate[1]);
@@ -98,6 +106,7 @@ export default class App extends React.Component{
         currentlyShowing: currentArray
       });
   }
+
 
   getReviews() {
     axios.get('/api/reviews/M20324')
