@@ -222,7 +222,20 @@ export default class App extends React.Component{
       }
 
       if (found) {
+        if (currentStars.length === 1) {
+          this.setState({
+            currentStars: [5, 4, 3, 2, 1],
+            sortingByStars: false
+          }, () => {
+            this.determineSort()})
+        }
+        // else {
+        //   for (var i = 0; i < currentStars.length; i++) {
+        //     if (currentStars[i] === 5) {
 
+        //     }
+        //   }
+        // }
       } else {
         currentStars.push(5);
         this.setState({
@@ -250,7 +263,6 @@ export default class App extends React.Component{
   }
 
   determineSort() {
-    console.log('insinde determineSort')
     if (this.state.currentSort === 'newest') {
       this.sortByNewest();
     } else if (this.state.currentSort === 'helpful') {
