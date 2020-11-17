@@ -110,7 +110,41 @@ export default class App extends React.Component{
   }
 
   sortByHelpful() {
+    var currentArray = [];
+    for (var i = 0; i < this.state.showCount; i++) {
+    var bestIndex = -1;
+    var bestDifference = -99999999;
 
+      for (var j = 0; j < this.state.reviewCount; j++) {
+
+        var found = false;
+        for (var k = 0; k < currentArray.length; k++) {
+          if (currentArray[k] === j) {
+            found = true;
+          }
+        }
+
+        var correctStarCount = false;
+        for (var k = 0; k < this.state.currentStars.length; k++) {
+          if (this.state.starRating[j] === this.state.currentStars[k]) {
+            correctStarCount = true;
+          }
+        }
+
+        if (!found && correctStarCount) {
+          var currentDifference = this.state.yesCount[j] - this.state.noCount[j];
+          if (currentDifference > bestDifference) {
+            bestDifference = currentDifference;
+            bestIndex = j;
+          }
+        }
+      }
+      currentArray.push(bestIndex);
+    }
+
+    this.setState({
+      currentlyShowing: currentArray
+    });
   }
 
   sortByRelevance() {
@@ -154,7 +188,8 @@ export default class App extends React.Component{
         comfortRating: results.data[0].comfortRating,
         qualityRating: results.data[0].qualityRating
       });
-      this.sortByRelevance();
+
+      this.sortByNewest();
     })
     .catch((err) => {
       console.error(err);
