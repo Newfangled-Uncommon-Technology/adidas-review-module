@@ -115,9 +115,21 @@ export default class App extends React.Component{
 
   sortByRelevance() {
     var currentArray = [];
-    for (var i = 0; i < this.state.showCount; i++) {
-      currentArray.push(i);
+    var i = -1;
+
+    while (currentArray.length <this.state.showCount) {
+      i++;
+      var correctStarCount = false;
+      for (var j = 0; j < this.state.currentStars.length; j++) {
+        if (this.state.starRating[i] === this.state.currentStars[j]) {
+          correctStarCount = true;
+        }
+      }
+      if(correctStarCount) {
+        currentArray.push(i);
+      }
     }
+
     this.setState({
       currentlyShowing: currentArray
     });
@@ -142,7 +154,7 @@ export default class App extends React.Component{
         comfortRating: results.data[0].comfortRating,
         qualityRating: results.data[0].qualityRating
       });
-      this.sortByDate();
+      this.sortByRelevance();
     })
     .catch((err) => {
       console.error(err);
