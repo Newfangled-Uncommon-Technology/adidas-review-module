@@ -31,6 +31,8 @@ export default class App extends React.Component{
     this.getReviews = this.getReviews.bind(this);
     this.getReviewStats = this.getReviewStats.bind(this);
     this.sortByNewest = this.sortByNewest.bind(this);
+    this.sortByHelpful = this.sortByHelpful.bind(this);
+    this.sortByRelevance = this.sortByRelevance.bind(this);
   }
 
   componentDidMount() {
@@ -107,6 +109,19 @@ export default class App extends React.Component{
       });
   }
 
+  sortByHelpful() {
+
+  }
+
+  sortByRelevance() {
+    var currentArray = [];
+    for (var i = 0; i < this.state.showCount; i++) {
+      currentArray.push(i);
+    }
+    this.setState({
+      currentlyShowing: currentArray
+    });
+  }
 
   getReviews() {
     axios.get('/api/reviews/M20324')
@@ -127,7 +142,7 @@ export default class App extends React.Component{
         comfortRating: results.data[0].comfortRating,
         qualityRating: results.data[0].qualityRating
       });
-      this.sortByNewest();
+      this.sortByDate();
     })
     .catch((err) => {
       console.error(err);
@@ -162,16 +177,6 @@ export default class App extends React.Component{
               return (
                 <Review review={thisReview}/>
               )
-              // return (
-              //   <div key={index}>
-              //     <div>{this.state.starRating[index]}</div>
-              //     <div>{this.state.date[index]}</div>
-              //     <div>{this.state.title[index]}</div>
-              //     <div>{this.state.text[index]}</div>
-              //     <div>{this.state.username[index]}</div>
-              //     <div>Was this review helpful? {this.state.yesCount[index]} {this.state.noCount[index]}</div>
-              //   </div>
-              // )
             })}
         </ul>
       </div>
