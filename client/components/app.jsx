@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Review from './Review.jsx';
 
 export default class App extends React.Component{
   constructor() {
@@ -21,7 +22,8 @@ export default class App extends React.Component{
       widthRating: [],
       comfortRating: [],
       qualityRating: [],
-      showCount: [0, 1]
+      showCount: 2,
+      currentlyShowing: []
     }
 
     this.getReviews = this.getReviews.bind(this);
@@ -73,6 +75,47 @@ export default class App extends React.Component{
         comfortRating: results.data[0].comfortRating,
         qualityRating: results.data[0].qualityRating
       });
+
+      var currentArray = [];
+
+      for (var k = 0; k < this.state.showCount; k++) {
+        var newestIndex = -1;
+        var newestDate = [-1];
+
+
+        for (var i = 0; i < this.state.reviewCount; i++) {
+
+
+          var found = false;
+          for (var j = 0; j < currentArray.length; j++) {
+            if (currentArray[j] === i) {
+              found = true;
+            }
+          }
+
+          if (!found) {
+            var currentDate = this.state.date[i].split('/');
+            currentDate[0] = Number(currentDate[0]);
+            currentDate[1] = Number(currentDate[1]);
+            if (newestDate === [-1]) {
+              newestDate = currentDate;
+              newestIndex = i;
+            } else if (currentDate[0] > newestDate[0]) {
+                newestDate = currentDate;
+                newestIndex = i
+            } else if ((currentDate[0] === newestDate[0]) && (currentDate[1] > newestDate[1])) {
+              newestDate = currentDate;
+              newestIndex = i
+            }
+          }
+        }
+        console.log(newestIndex)
+        currentArray.push(newestIndex)
+      }
+
+      this.setState({
+        currentlyShowing: currentArray
+      });
     })
     .catch((err) => {
       console.error(err);
@@ -87,21 +130,36 @@ export default class App extends React.Component{
     } else {
       return (
         <div>
+
           <div>
 
           </div>
+
           <ul className="reviews">
-            {this.state.showCount.map((ignore, index) => {
+            {this.state.currentlyShowing.map((reviewId, index) => {
+              var thisReview = {
+                starRating: this.state.starRating[reviewId],
+                date: this.state.date[reviewId],
+                title: this.state.title[reviewId],
+                text: this.state.text[reviewId],
+                username: this.state.username[reviewId],
+                yesCount: this.state.yesCount[reviewId],
+                noCount: this.state.noCount[reviewId]
+              }
+
               return (
-                <div key={index}>
-                  <div>{this.state.starRating[index]}</div>
-                  <div>{this.state.date[index]}</div>
-                  <div>{this.state.title[index]}</div>
-                  <div>{this.state.text[index]}</div>
-                  <div>{this.state.username[index]}</div>
-                  <div>Was this review helpful? {this.state.yesCount[index]} {this.state.noCount[index]}</div>
-                </div>
+                <Review review={thisReview}/>
               )
+              // return (
+              //   <div key={index}>
+              //     <div>{this.state.starRating[index]}</div>
+              //     <div>{this.state.date[index]}</div>
+              //     <div>{this.state.title[index]}</div>
+              //     <div>{this.state.text[index]}</div>
+              //     <div>{this.state.username[index]}</div>
+              //     <div>Was this review helpful? {this.state.yesCount[index]} {this.state.noCount[index]}</div>
+              //   </div>
+              // )
             })}
         </ul>
       </div>
