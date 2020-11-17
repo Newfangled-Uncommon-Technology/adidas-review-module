@@ -25,7 +25,8 @@ export default class App extends React.Component{
       showCount: 2,
       currentlyShowing: [],
       currentSort: '',
-      currentStars: [5, 4, 3, 2, 1]
+      currentStars: [5, 4, 3, 2, 1],
+      sortingByStars: false
     }
 
     this.getReviews = this.getReviews.bind(this);
@@ -33,6 +34,11 @@ export default class App extends React.Component{
     this.sortByNewest = this.sortByNewest.bind(this);
     this.sortByHelpful = this.sortByHelpful.bind(this);
     this.sortByRelevance = this.sortByRelevance.bind(this);
+    this.sortBy5 = this.sortBy5.bind(this);
+    this.sortBy4 = this.sortBy4.bind(this);
+    this.sortBy3 = this.sortBy3.bind(this);
+    this.sortBy2 = this.sortBy2.bind(this);
+    this.sortBy1 = this.sortBy1.bind(this);
   }
 
   componentDidMount() {
@@ -199,6 +205,65 @@ export default class App extends React.Component{
     })
   }
 
+  sortBy5() {
+    if (!this.state.sortingByStars) {
+      this.setState({
+        currentStars: [5],
+        sortingByStars: true
+      }, () => {
+        if (this.state.currentSort === 'newest') {
+          this.sortByNewest();
+        } else if (this.state.currentSort === 'helpful') {
+          this.sortByHelpful();
+        } else {
+          this.sortByRelevance();
+        }
+      });
+    } else {
+      var currentStars = this.state.currentStars;
+      var found = false;
+      for (var i = 0; i < currentStars; i++) {
+        if (currentStars[i] === 5) {
+          found = true;
+        }
+      }
+
+      if (found) {
+
+      } else {
+        currentStars.push(5);
+        this.setState({
+          currentStars: currentStars
+        }, () => {
+          if (this.state.currentSort === 'newest') {
+            this.sortByNewest();
+          } else if (this.state.currentSort === 'helpful') {
+            this.sortByHelpful();
+          } else {
+            this.sortByRelevance();
+          }
+        });
+      }
+    }
+
+  }
+
+  sortBy4() {
+
+  }
+
+  sortBy3() {
+
+  }
+
+  sortBy2() {
+
+  }
+
+  sortBy1() {
+
+  }
+
   render() {
     if (this.state.reviews === []) {
       return (
@@ -209,7 +274,14 @@ export default class App extends React.Component{
         <div>
 
           <div>
-
+            <button onClick={this.sortByNewest}>Newest</button> <button onClick={this.sortByHelpful}>Helpful</button> <button onClick={this.sortByRelevance}>Relevant</button>
+          </div>
+          <div>
+            <button onClick={this.sortBy5}>5 STARS</button>
+            <button onClick={this.sortByNewest}>4 STARS</button>
+            <button onClick={this.sortByNewest}>3 STARS</button>
+            <button onClick={this.sortByNewest}>2 STARS</button>
+            <button onClick={this.sortByNewest}>1 STARS</button>
           </div>
 
           <ul className="reviews">
