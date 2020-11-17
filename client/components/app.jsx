@@ -24,14 +24,37 @@ export default class App extends React.Component{
       showCount: [0, 1]
     }
 
+    this.getReviews = this.getReviews.bind(this);
     this.getReviewStats = this.getReviewStats.bind(this);
   }
 
   componentDidMount() {
+    this.getReviews();
     this.getReviewStats();
   }
 
   getReviewStats() {
+    axios.get('/api/reviewStats/M20324')
+    .then((results) => {
+      this.setState({
+        reviewStats: results.data[0],
+        averageRating: results.data[0].averageRating,
+        averageStar: results.data[0].averageStar,
+        fiveStar: results.data[0].fiveStar,
+        fourStar: results.data[0].fourStar,
+        threeStar: results.data[0].threeStar,
+        twoStar: results.data[0].twoStar,
+        oneStar: results.data[0].oneStar,
+        satisfactionPercent: results.data[0].satisfactionPercent,
+        averageSize: results.data[0].averageSize,
+        averageWidth: results.data[0].averageWidth,
+        averageComfort: results.data[0].averageComfort,
+        averageQuality: results.data[0].averageQuality
+      })
+    })
+  }
+
+  getReviews() {
     axios.get('/api/reviews/M20324')
     .then((results) => {
       this.setState({
@@ -63,20 +86,25 @@ export default class App extends React.Component{
       )
     } else {
       return (
-        <ul className="groceries">
-          {this.state.showCount.map((ignore, index) => {
-            return (
-              <div key={index}>
-                <div>{this.state.starRating[index]}</div>
-                <div>{this.state.date[index]}</div>
-                <div>{this.state.title[index]}</div>
-                <div>{this.state.text[index]}</div>
-                <div>{this.state.username[index]}</div>
-                <div>Was this review helpful? {this.state.yesCount[index]} {this.state.noCount[index]}</div>
-              </div>
-            )
-          })}
-      </ul>
+        <div>
+          <div>
+
+          </div>
+          <ul className="reviews">
+            {this.state.showCount.map((ignore, index) => {
+              return (
+                <div key={index}>
+                  <div>{this.state.starRating[index]}</div>
+                  <div>{this.state.date[index]}</div>
+                  <div>{this.state.title[index]}</div>
+                  <div>{this.state.text[index]}</div>
+                  <div>{this.state.username[index]}</div>
+                  <div>Was this review helpful? {this.state.yesCount[index]} {this.state.noCount[index]}</div>
+                </div>
+              )
+            })}
+        </ul>
+      </div>
       )
     }
   }
