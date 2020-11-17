@@ -24,7 +24,7 @@ export default class App extends React.Component{
       qualityRating: [],
       showCount: 2,
       currentlyShowing: [],
-      currentSort: 'date',
+      currentSort: '',
       currentStars: [5, 4, 3, 2, 1]
     }
 
@@ -105,7 +105,8 @@ export default class App extends React.Component{
       }
 
       this.setState({
-        currentlyShowing: currentArray
+        currentlyShowing: currentArray,
+        currentSort: 'newest'
       });
   }
 
@@ -143,7 +144,8 @@ export default class App extends React.Component{
     }
 
     this.setState({
-      currentlyShowing: currentArray
+      currentlyShowing: currentArray,
+      currentSort: 'helpful'
     });
   }
 
@@ -165,7 +167,8 @@ export default class App extends React.Component{
     }
 
     this.setState({
-      currentlyShowing: currentArray
+      currentlyShowing: currentArray,
+      currentSort: 'relevance'
     });
   }
 
