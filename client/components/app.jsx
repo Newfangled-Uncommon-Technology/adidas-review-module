@@ -21,7 +21,7 @@ export default class App extends React.Component{
       widthRating: [],
       comfortRating: [],
       qualityRating: [],
-      showCount: ['one', 'two']
+      showCount: [0, 1]
     }
 
     this.getReviewStats = this.getReviewStats.bind(this);
@@ -66,7 +66,14 @@ export default class App extends React.Component{
         <ul className="groceries">
           {this.state.showCount.map((ignore, index) => {
             return (
-              <div key={index}>{this.state.reviewId[index]}</div>
+              <div key={index}>
+                <div>{this.state.starRating[index]}</div>
+                <div>{this.state.date[index]}</div>
+                <div>{this.state.title[index]}</div>
+                <div>{this.state.text[index]}</div>
+                <div>{this.state.username[index]}</div>
+                <div>Was this review helpful? {this.state.yesCount[index]} {this.state.noCount[index]}</div>
+              </div>
             )
           })}
       </ul>
