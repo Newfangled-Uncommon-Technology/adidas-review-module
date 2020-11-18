@@ -73,7 +73,6 @@ it('Should increment the no count of a review', async done => {
 
   .then(() => {
     noWorks = (postNo === (initialNo + 1))
-    console.log(noWorks)
   })
 
   await request(server).put('/api/reviews/no/M20324')

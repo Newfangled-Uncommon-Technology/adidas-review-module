@@ -426,7 +426,7 @@ export default class App extends React.Component{
       return (
         <div>Ratings and Reviews</div>
       )
-    } else {
+    } else if (!this.state.sortingByStars) {
       return (
         <div>
 
@@ -458,6 +458,61 @@ export default class App extends React.Component{
               )
             })}
         </ul>
+
+      </div>
+      )
+    } else {
+      return (
+        <div>
+
+          <div>
+            <button onClick={this.sortByNewest}>Newest</button> <button onClick={this.sortByHelpful}>Helpful</button> <button onClick={this.sortByRelevance}>Relevant</button>
+          </div>
+          <div>
+            Showing reviews: {this.state.currentStars.map((number, index) => {
+              var onClick;
+              if (number === 1) {
+                onClick = this.sortBy1;
+              } else if (number === 2) {
+                onClick = this.sortBy2;
+              } else if (number === 3) {
+                onClick = this.sortBy3;
+              } else if (number === 4) {
+                onClick = this.sortBy4;
+              } else if (number === 5) {
+                onClick = this.sortBy5;
+              }
+              return (
+              <button onClick={onClick}>{number} STARS</button>
+              )
+            })}
+          </div>
+          <div>
+            <button onClick={this.sortBy5}>5 STARS</button>
+            <button onClick={this.sortBy4}>4 STARS</button>
+            <button onClick={this.sortBy3}>3 STARS</button>
+            <button onClick={this.sortBy2}>2 STARS</button>
+            <button onClick={this.sortBy1}>1 STARS</button>
+          </div>
+
+          <ul className="reviews">
+            {this.state.currentlyShowing.map((reviewId, index) => {
+              var thisReview = {
+                starRating: this.state.starRating[reviewId],
+                date: this.state.date[reviewId],
+                title: this.state.title[reviewId],
+                text: this.state.text[reviewId],
+                username: this.state.username[reviewId],
+                yesCount: this.state.yesCount[reviewId],
+                noCount: this.state.noCount[reviewId]
+              }
+
+              return (
+                <Review review={thisReview}/>
+              )
+            })}
+        </ul>
+
       </div>
       )
     }
