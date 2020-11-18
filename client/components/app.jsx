@@ -215,7 +215,7 @@ export default class App extends React.Component{
     } else {
       var currentStars = this.state.currentStars;
       var found = false;
-      for (var i = 0; i < currentStars; i++) {
+      for (var i = 0; i < currentStars.length; i++) {
         if (currentStars[i] === 5) {
           found = true;
         }
@@ -228,14 +228,16 @@ export default class App extends React.Component{
             sortingByStars: false
           }, () => {
             this.determineSort()})
+        } else {
+          for (var i = 0; i < currentStars.length; i++) {
+            if (currentStars[i] === 5) {
+              currentStars.splice(i, 1);
+            }
+          }
+          this.setState({
+            currentStars: currentStars
+          }, () => {this.determineSort()});
         }
-        // else {
-        //   for (var i = 0; i < currentStars.length; i++) {
-        //     if (currentStars[i] === 5) {
-
-        //     }
-        //   }
-        // }
       } else {
         currentStars.push(5);
         this.setState({
@@ -243,23 +245,170 @@ export default class App extends React.Component{
         }, () => {this.determineSort()});
       }
     }
-
   }
 
   sortBy4() {
+    if (!this.state.sortingByStars) {
+      this.setState({
+        currentStars: [4],
+        sortingByStars: true
+      }, () => {this.determineSort()});
+    } else {
+      var currentStars = this.state.currentStars;
+      var found = false;
+      for (var i = 0; i < currentStars.length; i++) {
+        if (currentStars[i] === 4) {
+          found = true;
+        }
+      }
 
+      if (found) {
+        if (currentStars.length === 1) {
+          this.setState({
+            currentStars: [5, 4, 3, 2, 1],
+            sortingByStars: false
+          }, () => {
+            this.determineSort()})
+        } else {
+          for (var i = 0; i < currentStars.length; i++) {
+            if (currentStars[i] === 4) {
+              currentStars.splice(i, 1);
+            }
+          }
+          this.setState({
+            currentStars: currentStars
+          }, () => {this.determineSort()});
+        }
+      } else {
+        currentStars.push(4);
+        this.setState({
+          currentStars: currentStars
+        }, () => {this.determineSort()});
+      }
+    }
   }
 
   sortBy3() {
+    if (!this.state.sortingByStars) {
+      this.setState({
+        currentStars: [3],
+        sortingByStars: true
+      }, () => {this.determineSort()});
+    } else {
+      var currentStars = this.state.currentStars;
+      var found = false;
+      for (var i = 0; i < currentStars.length; i++) {
+        if (currentStars[i] === 3) {
+          found = true;
+        }
+      }
 
+      if (found) {
+        if (currentStars.length === 1) {
+          this.setState({
+            currentStars: [5, 4, 3, 2, 1],
+            sortingByStars: false
+          }, () => {
+            this.determineSort()})
+        } else {
+          for (var i = 0; i < currentStars.length; i++) {
+            if (currentStars[i] === 3) {
+              currentStars.splice(i, 1);
+            }
+          }
+          this.setState({
+            currentStars: currentStars
+          }, () => {this.determineSort()});
+        }
+      } else {
+        currentStars.push(3);
+        this.setState({
+          currentStars: currentStars
+        }, () => {this.determineSort()});
+      }
+    }
   }
 
   sortBy2() {
+    if (!this.state.sortingByStars) {
+      this.setState({
+        currentStars: [2],
+        sortingByStars: true
+      }, () => {this.determineSort()});
+    } else {
+      var currentStars = this.state.currentStars;
+      var found = false;
+      for (var i = 0; i < currentStars.length; i++) {
+        if (currentStars[i] === 2) {
+          found = true;
+        }
+      }
 
+      if (found) {
+        if (currentStars.length === 1) {
+          this.setState({
+            currentStars: [5, 4, 3, 2, 1],
+            sortingByStars: false
+          }, () => {
+            this.determineSort()})
+        } else {
+          for (var i = 0; i < currentStars.length; i++) {
+            if (currentStars[i] === 2) {
+              currentStars.splice(i, 1);
+            }
+          }
+          this.setState({
+            currentStars: currentStars
+          }, () => {this.determineSort()});
+        }
+      } else {
+        currentStars.push(2);
+        this.setState({
+          currentStars: currentStars
+        }, () => {this.determineSort()});
+      }
+    }
   }
 
   sortBy1() {
+    if (!this.state.sortingByStars) {
+      this.setState({
+        currentStars: [1],
+        sortingByStars: true
+      }, () => {this.determineSort()});
+    } else {
+      var currentStars = this.state.currentStars;
+      var found = false;
+      for (var i = 0; i < currentStars.length; i++) {
+        if (currentStars[i] === 1) {
+          found = true;
+        }
+      }
 
+      if (found) {
+        if (currentStars.length === 1) {
+          this.setState({
+            currentStars: [5, 4, 3, 2, 1],
+            sortingByStars: false
+          }, () => {
+            this.determineSort()})
+        } else {
+          for (var i = 0; i < currentStars.length; i++) {
+            if (currentStars[i] === 1) {
+              currentStars.splice(i, 1);
+            }
+          }
+          this.setState({
+            currentStars: currentStars
+          }, () => {this.determineSort()});
+        }
+      } else {
+        currentStars.push(1);
+        this.setState({
+          currentStars: currentStars
+        }, () => {this.determineSort()});
+      }
+    }
   }
 
   determineSort() {
@@ -286,10 +435,10 @@ export default class App extends React.Component{
           </div>
           <div>
             <button onClick={this.sortBy5}>5 STARS</button>
-            <button onClick={this.sortByNewest}>4 STARS</button>
-            <button onClick={this.sortByNewest}>3 STARS</button>
-            <button onClick={this.sortByNewest}>2 STARS</button>
-            <button onClick={this.sortByNewest}>1 STARS</button>
+            <button onClick={this.sortBy4}>4 STARS</button>
+            <button onClick={this.sortBy3}>3 STARS</button>
+            <button onClick={this.sortBy2}>2 STARS</button>
+            <button onClick={this.sortBy1}>1 STARS</button>
           </div>
 
           <ul className="reviews">
