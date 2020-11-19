@@ -40,6 +40,7 @@ export default class App extends React.Component{
     this.sortBy2 = this.sortBy2.bind(this);
     this.sortBy1 = this.sortBy1.bind(this);
     this.determineSort = this.determineSort.bind(this);
+    this.loadMore = this.loadMore.bind(this);
   }
 
   componentDidMount() {
@@ -421,6 +422,16 @@ export default class App extends React.Component{
     }
   }
 
+  loadMore() {
+    var reviewsShowing = this.state.showCount;
+    reviewsShowing = reviewsShowing + 2;
+    this.setState({
+      showCount: reviewsShowing
+    }, () => {
+      this.determineSort();
+    });
+  }
+
   render() {
     if (this.state.reviews === []) {
       return (
@@ -458,7 +469,7 @@ export default class App extends React.Component{
               )
             })}
         </ul>
-
+        <button onClick={this.loadMore}>LOAD MORE</button> <button>WRITE A REVIEW</button>
       </div>
       )
     } else {
@@ -513,6 +524,7 @@ export default class App extends React.Component{
             })}
         </ul>
 
+        <button onClick={this.loadMore}>LOAD MORE</button> <button>WRITE A REVIEW</button>
       </div>
       )
     }
