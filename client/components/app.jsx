@@ -40,7 +40,7 @@ const FirstSeparator = styled.div `
   height: 4px;
   width: 4px;
   position: absolute;
-  left: 25%;
+  left: 23%;
   z-index: 2;
   top: 45%;
 `;
@@ -50,7 +50,7 @@ const SecondSeparator = styled.div `
   height: 4px;
   width: 4px;
   position: absolute;
-  left: 50%;
+  left: 46%;
   z-index: 2;
   top: 45%;
 `;
@@ -60,7 +60,7 @@ const ThirdSeparator = styled.div `
   height: 4px;
   width: 4px;
   position: absolute;
-  left: 75%;
+  left: 71%;
   z-index: 2;
   top: 45%;
 `;
@@ -80,6 +80,11 @@ const ArrowDown = styled.div `
 
 const Arrow = styled(ArrowDown)`
   left: ${props => props.left};
+`;
+
+const Right = styled.div `
+  position: absolute;
+  right: 0px;
 `;
 
 export default class App extends React.Component {
@@ -603,7 +608,11 @@ export default class App extends React.Component {
                 <Arrow left={this.state.averageComfort}></Arrow>
               </div>
               <div class="col-md-6">UNCOMFORTABLE</div>
-              <div class="col-md-6">COMFORTABLE</div>
+              <div class="col-md-6">
+                <div class="row">
+                  <Right class="col-md-12">COMFORTABLE</Right>
+                </div>
+              </div>
             </div>
             <br></br>
             <div>QUALITY</div>
@@ -616,7 +625,11 @@ export default class App extends React.Component {
                 <Arrow left={this.state.averageQuality}></Arrow>
               </div>
               <div class="col-md-6">POOR</div>
-              <div class="col-md-6">PERFECT</div>
+              <div class="col-md-6">
+                <div class="row">
+                  <Right class="col-md-12">PERFECT</Right>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -741,7 +754,11 @@ export default class App extends React.Component {
                 <Arrow left={this.state.averageComfort}></Arrow>
               </div>
               <div class="col-md-6">UNCOMFORTABLE</div>
-              <div class="col-md-6">COMFORTABLE</div>
+              <div class="col-md-6">
+                <div class="row">
+                  <Right class="col-md-12">COMFORTABLE</Right>
+                </div>
+              </div>
             </div>
             <br></br>
             <div>QUALITY</div>
@@ -754,7 +771,11 @@ export default class App extends React.Component {
                 <Arrow left={this.state.averageQuality}></Arrow>
               </div>
               <div class="col-md-6">POOR</div>
-              <div class="col-md-6">PERFECT</div>
+              <div class="col-md-6">
+                <div class="row">
+                  <Right class="col-md-12">PERFECT</Right>
+                </div>
+              </div>
             </div>
           </div>
 

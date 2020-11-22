@@ -55,18 +55,48 @@ for (var i = 0; i < sampleReviews.reviewCount; i++) {
   sampleReviews.qualityRating.push(Math.ceil(Math.random() * 10));
 }
 
-var averageRating = Math.random() * 5;
+
+var fiveStar = 0;
+var fourStar = 0;
+var threeStar = 0;
+var twoStar = 0;
+var oneStar = 0;
+var avgStar = 0;
+
+for (var i = 0; i < 100; i++) {
+  if (sampleReviews.starRating[i] === 5) {
+    fiveStar++;
+    avgStar += 5;
+  } else if (sampleReviews.starRating[i] === 4) {
+    fourStar++;
+    avgStar += 4;
+  } else if (sampleReviews.starRating[i] === 3) {
+    threeStar++;
+    avgStar += 3;
+  } else if (sampleReviews.starRating[i] === 2) {
+    twoStar++;
+    avgStar += 2;
+  } else {
+    oneStar++;
+    avgStar += 1;
+  }
+}
+
+
+avgStar = avgStar / 100;
+avgRating = avgStar;
+
 
 var sampleReviewStats = {
   shoeIds: ['M20324', 'M20325', 'M20327'],
   reviewCount: 100,
-  averageRating: averageRating,
-  averageStar: Math.round(averageRating),
-  fiveStar: Math.floor(Math.random() * 2),
-  fourStar: Math.floor(Math.random() * 2),
-  threeStar: Math.floor(Math.random() * 2),
-  twoStar: Math.floor(Math.random() * 2),
-  oneStar: Math.floor(Math.random() * 2),
+  averageRating: avgRating,
+  averageStar: Math.round(avgStar),
+  fiveStar: fiveStar,
+  fourStar: fourStar,
+  threeStar: threeStar,
+  twoStar: twoStar,
+  oneStar: oneStar,
   satisfactionPercent: Math.ceil(Math.random() * 100),
   averageSize: Math.random() * 10,
   averageWidth: Math.random() * 10,
