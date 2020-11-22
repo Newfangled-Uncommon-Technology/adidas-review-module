@@ -87,6 +87,11 @@ const Right = styled.div `
   right: 0px;
 `;
 
+const TopButton = styled.button `
+  padding: 16px 10px;
+  background: white;
+`
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -634,26 +639,32 @@ export default class App extends React.Component {
           </div>
 
           <div class="col-md-8">
-          <div>
-              <button onClick={this.sortByNewest}>Newest</button><button onClick={this.sortByHelpful}>Helpful</button><button onClick={this.  sortByRelevance}>Relevant</button>
+          <div class="row">
+              <div class="col-md-4"><TopButton onClick={this.sortByNewest}>NEWEST</TopButton></div>
+              <div class="col-md-4"><TopButton onClick={this.sortByHelpful}>HELPFUL</TopButton></div>
+              <div class="col-md-4"><TopButton onClick={this.  sortByRelevance}>RELEVANT</TopButton></div>
           </div>
-            <ul className="reviews">
-              {this.state.currentlyShowing.map((reviewId, index) => {
-                var thisReview = {
-                  starRating: this.state.starRating[reviewId],
-                  date: this.state.date[reviewId],
-                  title: this.state.title[reviewId],
-                  text: this.state.text[reviewId],
-                  username: this.state.username[reviewId],
-                  yesCount: this.state.yesCount[reviewId],
-                  noCount: this.state.noCount[reviewId]
-                }
+          <div class="row">
+            <div class="col-md-12">
+              <ul className="reviews">
+                {this.state.currentlyShowing.map((reviewId, index) => {
+                  var thisReview = {
+                    starRating: this.state.starRating[reviewId],
+                    date: this.state.date[reviewId],
+                    title: this.state.title[reviewId],
+                    text: this.state.text[reviewId],
+                    username: this.state.username[reviewId],
+                    yesCount: this.state.yesCount[reviewId],
+                    noCount: this.state.noCount[reviewId]
+                  }
 
-                return (
-                  <Review review={thisReview} />
-                )
-              })}
-            </ul>
+                  return (
+                    <Review review={thisReview} />
+                  )
+                })}
+              </ul>
+            </div>
+          </div>
             <button onClick={this.loadMore}>LOAD MORE</button> <button>WRITE A REVIEW</button>
           </div>
         </div>
@@ -780,27 +791,32 @@ export default class App extends React.Component {
           </div>
 
           <div class="col-md-8">
-          <div>
-              <button onClick={this.sortByNewest}>Newest</button><button onClick={this.sortByHelpful}>Helpful</button><button onClick={this.  sortByRelevance}>Relevant</button>
-          </div>
-            <ul className="reviews">
-              {this.state.currentlyShowing.map((reviewId, index) => {
-                var thisReview = {
-                  starRating: this.state.starRating[reviewId],
-                  date: this.state.date[reviewId],
-                  title: this.state.title[reviewId],
-                  text: this.state.text[reviewId],
-                  username: this.state.username[reviewId],
-                  yesCount: this.state.yesCount[reviewId],
-                  noCount: this.state.noCount[reviewId]
-                }
+            <div class="row">
+              <div class="col-md-4"><TopButton onClick={this.sortByNewest}>NEWEST</TopButton></div>
+              <div class="col-md-4"><TopButton onClick={this.sortByHelpful}>HELPFUL</TopButton></div>
+              <div class="col-md-4"><TopButton onClick={this.  sortByRelevance}>RELEVANT</TopButton></div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <ul className="reviews">
+                  {this.state.currentlyShowing.map((reviewId, index) => {
+                    var thisReview = {
+                      starRating: this.state.starRating[reviewId],
+                      date: this.state.date[reviewId],
+                      title: this.state.title[reviewId],
+                      text: this.state.text[reviewId],
+                      username: this.state.username[reviewId],
+                      yesCount: this.state.yesCount[reviewId],
+                      noCount: this.state.noCount[reviewId]
+                    }
 
-                return (
-                  <Review review={thisReview} />
-                )
-              })}
-            </ul>
-
+                    return (
+                      <Review review={thisReview} />
+                    )
+                  })}
+                </ul>
+              </div>
+            </div>
             <button onClick={this.loadMore}>LOAD MORE</button> <button>WRITE A REVIEW</button>
           </div>
         </div>

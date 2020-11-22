@@ -1,5 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const BlackBar = styled.hr `
+  border: 1px solid black;
+`;
 
 class Review extends React.Component {
   constructor(props) {
@@ -21,6 +26,7 @@ class Review extends React.Component {
         <div>{this.props.review.text}</div>
         <div>{this.props.review.username}</div>
         <div>Was this review Helpful? {this.props.review.yesCount} {this.props.review.noCount}</div>
+        <BlackBar></BlackBar>
       </div>
     )
   }
