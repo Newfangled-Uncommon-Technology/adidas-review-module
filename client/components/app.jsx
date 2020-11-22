@@ -88,9 +88,19 @@ const Right = styled.div `
 `;
 
 const TopButton = styled.button `
-  padding: 16px 10px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  width: 33%;
   background: white;
-`
+  display: block;
+`;
+
+const BottomButton = styled.button `
+  width: 50%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background: white;
+`;
 
 export default class App extends React.Component {
   constructor() {
@@ -640,13 +650,11 @@ export default class App extends React.Component {
 
           <div class="col-md-8">
           <div class="row">
-              <div class="col-md-4"><TopButton onClick={this.sortByNewest}>NEWEST</TopButton></div>
-              <div class="col-md-4"><TopButton onClick={this.sortByHelpful}>HELPFUL</TopButton></div>
-              <div class="col-md-4"><TopButton onClick={this.  sortByRelevance}>RELEVANT</TopButton></div>
+              <TopButton onClick={this.sortByNewest}>NEWEST</TopButton>
+              <TopButton onClick={this.sortByHelpful}>HELPFUL</TopButton>
+              <TopButton onClick={this.  sortByRelevance}>RELEVANT</TopButton>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <ul className="reviews">
+              <div className="reviews">
                 {this.state.currentlyShowing.map((reviewId, index) => {
                   var thisReview = {
                     starRating: this.state.starRating[reviewId],
@@ -662,10 +670,9 @@ export default class App extends React.Component {
                     <Review review={thisReview} />
                   )
                 })}
-              </ul>
-            </div>
-          </div>
-            <button onClick={this.loadMore}>LOAD MORE</button> <button>WRITE A REVIEW</button>
+              </div>
+                <BottomButton onClick={this.loadMore}>LOAD MORE</BottomButton>
+                <BottomButton>WRITE A REVIEW</BottomButton>
           </div>
         </div>
       )
@@ -792,13 +799,11 @@ export default class App extends React.Component {
 
           <div class="col-md-8">
             <div class="row">
-              <div class="col-md-4"><TopButton onClick={this.sortByNewest}>NEWEST</TopButton></div>
-              <div class="col-md-4"><TopButton onClick={this.sortByHelpful}>HELPFUL</TopButton></div>
-              <div class="col-md-4"><TopButton onClick={this.  sortByRelevance}>RELEVANT</TopButton></div>
+              <TopButton onClick={this.sortByNewest}>NEWEST</TopButton>
+              <TopButton onClick={this.sortByHelpful}>HELPFUL</TopButton>
+              <TopButton onClick={this.  sortByRelevance}>RELEVANT</TopButton>
             </div>
-            <div class="row">
-              <div class="col-md-12">
-                <ul className="reviews">
+                <div className="reviews">
                   {this.state.currentlyShowing.map((reviewId, index) => {
                     var thisReview = {
                       starRating: this.state.starRating[reviewId],
@@ -814,10 +819,9 @@ export default class App extends React.Component {
                       <Review review={thisReview} />
                     )
                   })}
-                </ul>
-              </div>
             </div>
-            <button onClick={this.loadMore}>LOAD MORE</button> <button>WRITE A REVIEW</button>
+              <BottomButton onClick={this.loadMore}>LOAD MORE</BottomButton>
+              <BottomButton>WRITE A REVIEW</BottomButton>
           </div>
         </div>
       )
