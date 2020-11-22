@@ -1,6 +1,86 @@
 import React from 'react';
 import axios from 'axios';
+import styled, {css} from 'styled-components';
 import Review from './Review.jsx';
+
+const StarButton = styled.button `
+  border: none;
+  background: white;
+  text-decoration: underline;
+
+  :hover {
+    background: black;
+    color: white;
+  }
+`;
+
+const RatingOverview = styled.div `
+  background: #00cc66;
+`;
+
+const AverageBar = styled.div `
+
+`;
+
+const StepWrapper = styled.div `
+  display: flex;
+  height:100%;
+  justify-content:space-between;
+  width:100%;
+  color: black;
+`;
+
+const Bar = styled.hr `
+  border: 2px solid grey;
+  z-index: 1;
+`;
+
+const FirstSeparator = styled.div `
+  background-color: white;
+  height: 4px;
+  width: 4px;
+  position: absolute;
+  left: 25%;
+  z-index: 2;
+  top: 45%;
+`;
+
+const SecondSeparator = styled.div `
+  background-color: white;
+  height: 4px;
+  width: 4px;
+  position: absolute;
+  left: 50%;
+  z-index: 2;
+  top: 45%;
+`;
+
+const ThirdSeparator = styled.div `
+  background-color: white;
+  height: 4px;
+  width: 4px;
+  position: absolute;
+  left: 75%;
+  z-index: 2;
+  top: 45%;
+`;
+
+
+
+const ArrowDown = styled.div `
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 20px solid #2ada71;
+  position: absolute;
+  z-index: 3;
+  top: 20%;
+`;
+
+const Arrow = styled(ArrowDown)`
+  left: ${props => props.left};
+`;
 
 export default class App extends React.Component {
   constructor() {
@@ -44,13 +124,17 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getReviews();
     this.getReviewStats();
+    this.getReviews();
   }
 
   getReviewStats() {
     axios.get('/api/reviewStats/M20324')
       .then((results) => {
+        var avgSize = (results.data[0].averageSize * 10).toString() + '%';
+        var avgWidth = (results.data[0].averageWidth * 10).toString() + '%';
+        var avgComfort = (results.data[0].averageComfort * 10).toString() + '%';
+        var avgQuality = (results.data[0].averageQuality * 10).toString() + '%';
         this.setState({
           reviewStats: results.data[0],
           averageRating: results.data[0].averageRating,
@@ -61,10 +145,10 @@ export default class App extends React.Component {
           twoStar: results.data[0].twoStar,
           oneStar: results.data[0].oneStar,
           satisfactionPercent: results.data[0].satisfactionPercent,
-          averageSize: results.data[0].averageSize,
-          averageWidth: results.data[0].averageWidth,
-          averageComfort: results.data[0].averageComfort,
-          averageQuality: results.data[0].averageQuality
+          averageSize: avgSize,
+          averageWidth: avgWidth,
+          averageComfort: avgComfort,
+          averageQuality: avgQuality
         })
       })
   }
@@ -438,28 +522,108 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (this.state.reviews === []) {
+    if (this.state.reviews === [] || this.state.averageRating === undefined) {
       return (
         <div>Ratings and Reviews</div>
       )
     } else if (!this.state.sortingByStars) {
       return (
         <div class="row">
-
           <div class="col-md-4">
-            <div>
-              <button onClick={this.sortByNewest}>Newest</button> <button onClick={this.sortByHelpful}>Helpful</button> <button onClick={this.  sortByRelevance}>Relevant</button>
+          <h3>RATINGS AND REVIEWS</h3>
+          <RatingOverview>
+            <div class="row">
+              <div class="col-md-5">
+                <h1>{this.state.averageRating.toPrecision(2) || 0}</h1>
+              </div>
+              <div class="col-md'7">
+              {/* <div class="gl-star-rating__item"><div class="gl-star-rating__mask"><svg class="gl-star-rating__star" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path class="gl-star-rating__fill" fill="currentColor" stroke="0" d="M13.277,6.182L9.697,8.782L11.057,12.992L7.487,10.392L3.907,12.992L5.277,8.782L1.697,6.182L6.117,6.182L7.487,1.992L8.857,6.182L13.277,6.182Z"></path></svg></div><svg class="gl-star-rating__star" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path class="gl-star-rating__outline" fill="none" stroke="currentColor" stroke-miterlimit="10" d="M13.277,6.182L9.697,8.782L11.057,12.992L7.487,10.392L3.907,12.992L5.277,8.782L1.697,6.182L6.117,6.182L7.487,1.992L8.857,6.182L13.277,6.182Z"></path></svg></div> */}
+                <div>{this.state.averageStar}</div>
+                <div>{this.state.reviewCount}</div>
+              </div>
             </div>
+          </RatingOverview>
+          <h4>RATING BREAKDOWN</h4>
             <div>
-              <button onClick={this.sortBy5}>5 STARS</button>
-              <button onClick={this.sortBy4}>4 STARS</button>
-              <button onClick={this.sortBy3}>3 STARS</button>
-              <button onClick={this.sortBy2}>2 STARS</button>
-              <button onClick={this.sortBy1}>1 STARS</button>
+              <div>
+                <StarButton onClick={this.sortBy5}>5 STARS</StarButton> baaaaaaaaaar {this.state.fiveStar}
+              </div>
+              <div>
+                <StarButton onClick={this.sortBy4}>4 STARS</StarButton> baaaaaaaaaar {this.state.fourStar}
+              </div>
+              <div>
+              <StarButton onClick={this.sortBy3}>3 STARS</StarButton> baaaaaaaaaar {this.state.threeStar}
+              </div>
+              <div>
+              <StarButton onClick={this.sortBy2}>2 STARS</StarButton> baaaaaaaaaar {this.state.twoStar}
+              </div>
+              <div>
+              <StarButton onClick={this.sortBy1}>1 STARS</StarButton> baaaaaaaaaar {this.state.oneStar}
+              </div>
+            </div>
+            <hr></hr>
+            <h1>{this.state.satisfactionPercent}%</h1>
+            <div>of customers recommended this product</div>
+            <br></br>
+            <div>SIZE</div>
+            <div class="row">
+              <div class="col-md-12">
+                <Bar></Bar>
+                <FirstSeparator></FirstSeparator>
+                <SecondSeparator></SecondSeparator>
+                <ThirdSeparator></ThirdSeparator>
+                <Arrow left={this.state.averageSize}></Arrow>
+              </div>
+              <div class="col-md-4">TOO SMALL</div>
+              <div class="col-md-4">PERFECT</div>
+              <div class="col-md-4">TOO LARGE</div>
+            </div>
+            <br></br>
+            <div>WIDTH</div>
+            <div class="row">
+              <div class="col-md-12">
+                <Bar></Bar>
+                <FirstSeparator></FirstSeparator>
+                <SecondSeparator></SecondSeparator>
+                <ThirdSeparator></ThirdSeparator>
+                <Arrow left={this.state.averageWidth}></Arrow>
+              </div>
+              <div class="col-md-4">TOO NARROW</div>
+              <div class="col-md-4">PERFECT</div>
+              <div class="col-md-4">TOO WIDE</div>
+            </div>
+            <br></br>
+            <div>COMFORT</div>
+            <div class="row">
+              <div class="col-md-12">
+                <Bar></Bar>
+                <FirstSeparator></FirstSeparator>
+                <SecondSeparator></SecondSeparator>
+                <ThirdSeparator></ThirdSeparator>
+                <Arrow left={this.state.averageComfort}></Arrow>
+              </div>
+              <div class="col-md-6">UNCOMFORTABLE</div>
+              <div class="col-md-6">COMFORTABLE</div>
+            </div>
+            <br></br>
+            <div>QUALITY</div>
+            <div class="row">
+              <div class="col-md-12">
+                <Bar></Bar>
+                <FirstSeparator></FirstSeparator>
+                <SecondSeparator></SecondSeparator>
+                <ThirdSeparator></ThirdSeparator>
+                <Arrow left={this.state.averageQuality}></Arrow>
+              </div>
+              <div class="col-md-6">POOR</div>
+              <div class="col-md-6">PERFECT</div>
             </div>
           </div>
 
           <div class="col-md-8">
+          <div>
+              <button onClick={this.sortByNewest}>Newest</button><button onClick={this.sortByHelpful}>Helpful</button><button onClick={this.  sortByRelevance}>Relevant</button>
+          </div>
             <ul className="reviews">
               {this.state.currentlyShowing.map((reviewId, index) => {
                 var thisReview = {
@@ -486,9 +650,19 @@ export default class App extends React.Component {
         <div class="row">
 
           <div class="col-md-4">
-            <div>
-              <button onClick={this.sortByNewest}>Newest</button> <button onClick={this.sortByHelpful}>Helpful</button> <button onClick={this.  sortByRelevance}>Relevant</button>
+          <h3>RATINGS AND REVIEWS</h3>
+          <RatingOverview>
+            <div class="row">
+              <div class="col-md-5">
+                <h1>{this.state.averageRating.toPrecision(2)}</h1>
+              </div>
+              <div class="col-md'7">
+                <div>{this.state.averageStar}</div>
+                <div>{this.state.reviewCount}</div>
+              </div>
             </div>
+          </RatingOverview>
+          <h4>RATING BREAKDOWN</h4>
             <div>
               Showing reviews: {this.state.currentStars.map((number, index) => {
               var onClick;
@@ -504,20 +678,90 @@ export default class App extends React.Component {
                 onClick = this.sortBy5;
               }
               return (
-                <button onClick={onClick}>{number} STARS</button>
+                <StarButton onClick={onClick}>{number} STARS</StarButton>
               )
             })}
             </div>
             <div>
-              <button onClick={this.sortBy5}>5 STARS</button>
-              <button onClick={this.sortBy4}>4 STARS</button>
-              <button onClick={this.sortBy3}>3 STARS</button>
-              <button onClick={this.sortBy2}>2 STARS</button>
-              <button onClick={this.sortBy1}>1 STARS</button>
+              <div>
+                <StarButton onClick={this.sortBy5}>5 STARS</StarButton> baaaaaaaaaar {this.state.fiveStar}
+              </div>
+              <div>
+                <StarButton onClick={this.sortBy4}>4 STARS</StarButton> baaaaaaaaaar {this.state.fourStar}
+              </div>
+              <div>
+              <StarButton onClick={this.sortBy3}>3 STARS</StarButton> baaaaaaaaaar {this.state.threeStar}
+              </div>
+              <div>
+              <StarButton onClick={this.sortBy2}>2 STARS</StarButton> baaaaaaaaaar {this.state.twoStar}
+              </div>
+              <div>
+              <StarButton onClick={this.sortBy1}>1 STARS</StarButton> baaaaaaaaaar {this.state.oneStar}
+              </div>
+            </div>
+            <hr></hr>
+            <h1>{this.state.satisfactionPercent}%</h1>
+            <div>of customers recommended this product</div>
+            <br></br>
+            <div>SIZE</div>
+            <div class="row">
+              <div class="col-md-12">
+                <Bar></Bar>
+                <FirstSeparator></FirstSeparator>
+                <SecondSeparator></SecondSeparator>
+                <ThirdSeparator></ThirdSeparator>
+                <Arrow left={this.state.averageSize}></Arrow>
+              </div>
+              <div class="col-md-4">TOO SMALL</div>
+              <div class="col-md-4">PERFECT</div>
+              <div class="col-md-4">TOO LARGE</div>
+            </div>
+            <br></br>
+            <div>WIDTH</div>
+            <div class="row">
+              <div class="col-md-12">
+                <Bar></Bar>
+                <FirstSeparator></FirstSeparator>
+                <SecondSeparator></SecondSeparator>
+                <ThirdSeparator></ThirdSeparator>
+                <Arrow left={this.state.averageWidth}></Arrow>
+              </div>
+              <div class="col-md-4">TOO NARROW</div>
+              <div class="col-md-4">PERFECT</div>
+              <div class="col-md-4">TOO WIDE</div>
+            </div>
+            <br></br>
+            <div>COMFORT</div>
+            <div class="row">
+              <div class="col-md-12">
+                <Bar></Bar>
+                <FirstSeparator></FirstSeparator>
+                <SecondSeparator></SecondSeparator>
+                <ThirdSeparator></ThirdSeparator>
+                <Arrow left={this.state.averageComfort}></Arrow>
+              </div>
+              <div class="col-md-6">UNCOMFORTABLE</div>
+              <div class="col-md-6">COMFORTABLE</div>
+            </div>
+            <br></br>
+            <div>QUALITY</div>
+            <div class="row">
+              <div class="col-md-12">
+                <Bar></Bar>
+                <FirstSeparator></FirstSeparator>
+                <SecondSeparator></SecondSeparator>
+                <ThirdSeparator></ThirdSeparator>
+                <Arrow left={this.state.averageQuality}></Arrow>
+              </div>
+              <div class="col-md-6">POOR</div>
+              <div class="col-md-6">PERFECT</div>
             </div>
           </div>
 
           <div class="col-md-8">
+          <div>
+              <button onClick={this.sortByNewest}>Newest</button><button onClick={this.sortByHelpful}>Helpful</button><button onClick={this.  sortByRelevance}>Relevant</button>
+          </div>
             <ul className="reviews">
               {this.state.currentlyShowing.map((reviewId, index) => {
                 var thisReview = {
