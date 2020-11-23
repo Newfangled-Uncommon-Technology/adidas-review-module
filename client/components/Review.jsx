@@ -14,17 +14,67 @@ const Star = styled.div `
 const Date = styled.div `
   position: absolute;
   right: 15px;
-`
+`;
+
+const Title = styled.h5 `
+  margin-top: 5px;
+`;
+
+const HelpfulButton = styled.button `
+  border: none;
+  background: white;
+  text-decoration: underline;
+  padding-right: 3px;
+  padding-left: 3px;
+  :hover {
+    background: black;
+    color: white;
+  }
+`;
 
 class Review extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-
+      yesCount: this.props.review.yesCount,
+      noCount: this.props.review.noCount
     }
 
+    this.addYes = this.addYes.bind(this);
+    this.addNo = this.addNo.bind(this);
+  }
 
+  addYes() {
+    axios.put('/api/reviews/yes/M20324', {
+      "reviewId": this.props.review.reviewId,
+      "increment": 1
+    })
+    .then(() => {
+      var nextYes = this.state.yesCount + 1;
+      this.setState({
+        yesCount: nextYes
+      })
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  }
+
+  addNo() {
+    axios.put('/api/reviews/no/M20324', {
+      "reviewId": this.props.review.reviewId,
+      "increment": 1
+    })
+    .then(() => {
+      var nextNo = this.state.noCount + 1;
+      this.setState({
+        noCount: nextNo
+      })
+    })
+    .catch((err) => {
+      console.error(err);
+    })
   }
 
   render() {
@@ -58,10 +108,10 @@ class Review extends React.Component {
 
         <Date>{this.props.review.date}</Date>
         </div>
-        <div>{this.props.review.title}</div>
+        <Title>{this.props.review.title}</Title>
         <div>{this.props.review.text}</div>
-        <div>{this.props.review.username}</div>
-        <div>Was this review Helpful? {this.props.review.yesCount} {this.props.review.noCount}</div>
+        <h5>{this.props.review.username}</h5>
+        <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton>({this.state.yesCount})  <HelpfulButton onClick={this.addNo}>No</HelpfulButton>({this.state.noCount})</div>
         <BlackBar></BlackBar>
       </div>
     )

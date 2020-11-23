@@ -10,6 +10,11 @@ margin-right: 30px;
   font-family: Helvetica;
 `;
 
+const AverageRating = styled.div `
+  position: absolute;
+  left: 50%;
+`
+
 const StarButton = styled.button `
   border: none;
   background: white;
@@ -24,7 +29,9 @@ const StarButton = styled.button `
 
 const RatingOverview = styled.div `
   background: #00cc66;
+  padding-top: 16px;
   padding-bottom: 16px;
+  margin-bottom: 10px;
 `;
 
 const StepWrapper = styled.div `
@@ -613,11 +620,15 @@ export default class App extends React.Component {
         <Container>
           <div class="row">
           <div class="col-md-4">
-          <h3>RATINGS AND REVIEWS</h3>
+          <h3>RATINGS & REVIEWS</h3>
           <RatingOverview>
             <div class="row">
               <div class="col-md-5">
-                <h1>{this.state.averageRating.toPrecision(2) || 0}</h1>
+                  <div class="row">
+                    <AverageRating>
+                      <h1>{this.state.averageRating.toPrecision(2) || 0}</h1>
+                    </AverageRating>
+                  </div>
               </div>
               <div class="col-md-7">
 
@@ -754,6 +765,7 @@ export default class App extends React.Component {
               <div className="reviews">
                 {this.state.currentlyShowing.map((reviewId, index) => {
                   var thisReview = {
+                    reviewId: reviewId,
                     starRating: this.state.starRating[reviewId],
                     date: this.state.date[reviewId],
                     title: this.state.title[reviewId],
@@ -780,11 +792,15 @@ export default class App extends React.Component {
         <div class="row">
 
           <div class="col-md-4">
-          <h3>RATINGS AND REVIEWS</h3>
+          <h3>RATINGS & REVIEWS</h3>
           <RatingOverview>
             <div class="row">
               <div class="col-md-5">
-                <h1>{this.state.averageRating.toPrecision(2)}</h1>
+                <div class="row">
+                  <AverageRating>
+                    <h1>{this.state.averageRating.toPrecision(2) || 0}</h1>
+                  </AverageRating>
+                </div>
               </div>
               <div class="col-md-7">
                 <div class="row">
