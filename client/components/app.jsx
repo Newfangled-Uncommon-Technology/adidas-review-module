@@ -219,9 +219,17 @@ export default class App extends React.Component {
             starArr.push('unfilled');
           }
           var fiveStarPercent = (this.state.fiveStar / this.state.reviewCount * 100).toString() + '%';
+          var fourStarPercent = (this.state.fourStar / this.state.reviewCount * 100).toString() + '%';
+          var threeStarPercent = (this.state.threeStar / this.state.reviewCount * 100).toString() + '%';
+          var twoStarPercent = (this.state.twoStar / this.state.reviewCount * 100).toString() + '%';
+          var oneStarPercent = (this.state.oneStar / this.state.reviewCount * 100).toString() + '%';
           this.setState({
             starArr: starArr,
-            fiveStarPercent: fiveStarPercent
+            fiveStarPercent: fiveStarPercent,
+            fourStarPercent: fourStarPercent,
+            threeStarPercent: threeStarPercent,
+            twoStarPercent: twoStarPercent,
+            oneStarPercent: oneStarPercent
           });
         });
       })
@@ -645,21 +653,30 @@ export default class App extends React.Component {
                 <ReviewCountCol class="col-md-1">{this.state.fiveStar}</ReviewCountCol>
               </div>
 
-              <div>
-                <StarButton onClick={this.sortBy5}>5 STARS</StarButton> baaaaaaaaaar {this.state.fiveStar}
+              <div class="row">
+                <StarButtonCol class="col-md-3"> <StarButton onClick={this.sortBy4}>4 STARS</StarButton></StarButtonCol>
+                <div class="col-md-8"><ReviewBar></ReviewBar><FilledBar width={this.state.fourStarPercent}></FilledBar></div>
+                <ReviewCountCol class="col-md-1">{this.state.fourStar}</ReviewCountCol>
               </div>
-              <div>
-                <StarButton onClick={this.sortBy4}>4 STARS</StarButton> baaaaaaaaaar {this.state.fourStar}
+
+              <div class="row">
+                <StarButtonCol class="col-md-3"> <StarButton onClick={this.sortBy3}>3 STARS</StarButton></StarButtonCol>
+                <div class="col-md-8"><ReviewBar></ReviewBar><FilledBar width={this.state.threeStarPercent}></FilledBar></div>
+                <ReviewCountCol class="col-md-1">{this.state.threeStar}</ReviewCountCol>
               </div>
-              <div>
-              <StarButton onClick={this.sortBy3}>3 STARS</StarButton> baaaaaaaaaar {this.state.threeStar}
+
+              <div class="row">
+                <StarButtonCol class="col-md-3"> <StarButton onClick={this.sortBy2}>2 STARS</StarButton></StarButtonCol>
+                <div class="col-md-8"><ReviewBar></ReviewBar><FilledBar width={this.state.twoStarPercent}></FilledBar></div>
+                <ReviewCountCol class="col-md-1">{this.state.twoStar}</ReviewCountCol>
               </div>
-              <div>
-              <StarButton onClick={this.sortBy2}>2 STARS</StarButton> baaaaaaaaaar {this.state.twoStar}
+
+              <div class="row">
+                <StarButtonCol class="col-md-3"> <StarButton onClick={this.sortBy1}>1 STARS</StarButton></StarButtonCol>
+                <div class="col-md-8"><ReviewBar></ReviewBar><FilledBar width={this.state.oneStarPercent}></FilledBar></div>
+                <ReviewCountCol class="col-md-1">{this.state.oneStar}</ReviewCountCol>
               </div>
-              <div>
-              <StarButton onClick={this.sortBy1}>1 STARS</StarButton> baaaaaaaaaar {this.state.oneStar}
-              </div>
+
             </div>
             <hr></hr>
             <h1>{this.state.satisfactionPercent}%</h1>
