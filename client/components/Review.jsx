@@ -38,7 +38,8 @@ class Review extends React.Component {
 
     this.state = {
       yesCount: this.props.review.yesCount,
-      noCount: this.props.review.noCount
+      noCount: this.props.review.noCount,
+      feedbackSubmitted: false
     }
 
     this.addYes = this.addYes.bind(this);
@@ -53,7 +54,8 @@ class Review extends React.Component {
     .then(() => {
       var nextYes = this.state.yesCount + 1;
       this.setState({
-        yesCount: nextYes
+        yesCount: nextYes,
+        feedbackSubmitted: true
       })
     })
     .catch((err) => {
@@ -69,7 +71,8 @@ class Review extends React.Component {
     .then(() => {
       var nextNo = this.state.noCount + 1;
       this.setState({
-        noCount: nextNo
+        noCount: nextNo,
+        feedbackSubmitted: true
       })
     })
     .catch((err) => {
@@ -87,6 +90,7 @@ class Review extends React.Component {
     }
 
 
+    if (!this.state.feedbackSubmitted) {
     return (
       <div>
         <div class="row">
@@ -111,10 +115,42 @@ class Review extends React.Component {
         <Title>{this.props.review.title}</Title>
         <div>{this.props.review.text}</div>
         <h5>{this.props.review.username}</h5>
-        <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton>({this.state.yesCount})  <HelpfulButton onClick={this.addNo}>No</HelpfulButton>({this.state.noCount})</div>
+        <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton>({this.props.review.yesCount})  <HelpfulButton onClick={this.addNo}>No</HelpfulButton>({this.props.review.noCount})</div>
         <BlackBar></BlackBar>
       </div>
     )
+    } else {
+      return (
+        <div>
+        <div class="row">
+        {starArr.map((fillStatus, index) => {
+                  if (fillStatus === 'filled') {
+                    return (
+                      <Star>
+                      <svg class="gl-star-rating__star" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path class="gl-star-rating__fill" fill="currentColor" stroke="0" d="M13.277,6.182L9.697,8.782L11.057,12.992L7.487,10.392L3.907,12.992L5.277,8.782L1.697,6.182L6.117,6.182L7.487,1.992L8.857,6.182L13.277,6.182Z"></path></svg>
+                      </Star>
+                    )
+                  } else {
+                    return (
+                      <Star>
+                      <svg class="gl-star-rating__star" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path class="gl-star-rating__outline"  fill="none" stroke="currentColor" stroke-miterlimit="10" d="M13.277,6.182L9.697,8.782L11.057,12.992L7.487,10.392L3.907,12.992L5.277, 8.782L1.697,6.182L6.117,6.182L7.487,1.992L8.857,6.182L13.277,6.182Z"></path></svg>
+                      </Star>
+                    )
+                  }
+        })}
+
+        <Date>{this.props.review.date}</Date>
+        </div>
+        <Title>{this.props.review.title}</Title>
+        <div>{this.props.review.text}</div>
+        <h5>{this.props.review.username}</h5>
+        <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton>({this.props.review.yesCount})  <HelpfulButton onClick={this.addNo}>No</HelpfulButton>({this.props.review.noCount})</div>
+        <br></br>
+        <div>Thank you! You have successfully submitted feedback for this review</div>
+        <BlackBar></BlackBar>
+      </div>
+      )
+    }
   }
 }
 
