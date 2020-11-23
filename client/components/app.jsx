@@ -108,11 +108,6 @@ const BottomButton = styled.button `
   background: white;
 `;
 
-const StarsBox = styled.div `
-  display: inline;
-  width: 18%;
-`;
-
 const Star = styled.div `
   display: inline;
   width: 12%;

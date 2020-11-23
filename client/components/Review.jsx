@@ -8,8 +8,13 @@ const BlackBar = styled.hr `
 
 const Star = styled.div `
   display: inline;
-  width: 12%;
+  width: 4%;
 `;
+
+const Date = styled.div `
+  position: absolute;
+  right: 15px;
+`
 
 class Review extends React.Component {
   constructor(props) {
@@ -31,6 +36,7 @@ class Review extends React.Component {
       starArr.push('unfilled');
     }
 
+
     return (
       <div>
         <div class="row">
@@ -49,8 +55,9 @@ class Review extends React.Component {
                     )
                   }
         })}
+
+        <Date>{this.props.review.date}</Date>
         </div>
-        <div>{this.props.review.date}</div>
         <div>{this.props.review.title}</div>
         <div>{this.props.review.text}</div>
         <div>{this.props.review.username}</div>
