@@ -6,13 +6,16 @@ import Review from './Review.jsx';
 const Container = styled.div `
   margin-left: 30px;
   margin-right: 30px;
+  font-size: 13px;
+  font-family: Helvetica;
 `;
 
 const StarButton = styled.button `
   border: none;
   background: white;
   text-decoration: underline;
-
+  padding-right: 3px;
+  padding-left: 3px;
   :hover {
     background: black;
     color: white;
@@ -22,10 +25,6 @@ const StarButton = styled.button `
 const RatingOverview = styled.div `
   background: #00cc66;
   padding-bottom: 16px;
-`;
-
-const AverageBar = styled.div `
-
 `;
 
 const StepWrapper = styled.div `
@@ -112,6 +111,33 @@ const Star = styled.div `
   display: inline;
   width: 12%;
 `;
+
+const StarButtonCol = styled.div `
+  margin-right: 0px;
+  margin-left: 15px;
+  margin-top: 7px;
+`;
+
+const ReviewCountCol = styled.div `
+  margin-top: 7px;
+`
+
+const ReviewBar = styled.hr `
+  border: 2px solid grey;
+  border-radius: 5px;
+`;
+
+const FilledReviewBar = styled.div `
+z-index: 7;
+border-radius: 5px;
+position: absolute;
+left: 15px;
+top: 16px;
+z-index: 3;
+border: 2px solid #2ada71;
+background-color: #2ada71;
+width: 50%;
+`
 
 export default class App extends React.Component {
   constructor() {
@@ -607,6 +633,13 @@ export default class App extends React.Component {
           </RatingOverview>
           <h4>RATING BREAKDOWN</h4>
             <div>
+
+              <div class="row">
+                <StarButtonCol class="col-md-3"> <StarButton onClick={this.sortBy5}>5 STARS</StarButton></StarButtonCol>
+                <div class="col-md-8"><ReviewBar></ReviewBar><FilledReviewBar></FilledReviewBar></div>
+                <ReviewCountCol class="col-md-1">{this.state.fiveStar}</ReviewCountCol>
+              </div>
+
               <div>
                 <StarButton onClick={this.sortBy5}>5 STARS</StarButton> baaaaaaaaaar {this.state.fiveStar}
               </div>
