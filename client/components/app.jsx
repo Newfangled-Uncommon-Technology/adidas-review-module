@@ -4,8 +4,8 @@ import styled, {css} from 'styled-components';
 import Review from './Review.jsx';
 
 const Container = styled.div `
-  margin-left: 30px;
-  margin-right: 30px;
+margin-left: 30px;
+margin-right: 30px;
   font-size: 13px;
   font-family: Helvetica;
 `;
@@ -136,8 +136,11 @@ top: 16px;
 z-index: 3;
 border: 2px solid #2ada71;
 background-color: #2ada71;
-width: 50%;
-`
+`;
+
+const FilledBar = styled(FilledReviewBar) `
+  width: ${props => props.width};
+`;
 
 export default class App extends React.Component {
   constructor() {
@@ -182,8 +185,8 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getReviewStats();
     this.getReviews();
+    this.getReviewStats();
   }
 
   getReviewStats() {
@@ -215,8 +218,10 @@ export default class App extends React.Component {
           for (var i = 5; i > this.state.averageStar; i--) {
             starArr.push('unfilled');
           }
+          var fiveStarPercent = (this.state.fiveStar / this.state.reviewCount * 100).toString() + '%';
           this.setState({
-            starArr: starArr
+            starArr: starArr,
+            fiveStarPercent: fiveStarPercent
           });
         });
       })
@@ -636,7 +641,7 @@ export default class App extends React.Component {
 
               <div class="row">
                 <StarButtonCol class="col-md-3"> <StarButton onClick={this.sortBy5}>5 STARS</StarButton></StarButtonCol>
-                <div class="col-md-8"><ReviewBar></ReviewBar><FilledReviewBar></FilledReviewBar></div>
+                <div class="col-md-8"><ReviewBar></ReviewBar><FilledBar width={this.state.fiveStarPercent}></FilledBar></div>
                 <ReviewCountCol class="col-md-1">{this.state.fiveStar}</ReviewCountCol>
               </div>
 
