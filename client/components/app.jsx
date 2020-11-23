@@ -102,6 +102,16 @@ const BottomButton = styled.button `
   background: white;
 `;
 
+const StarsBox = styled.div `
+  display: inline;
+  width: 18%;
+`;
+
+const Star = styled.div `
+  display: inline;
+  width: 12%;
+`;
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -126,7 +136,8 @@ export default class App extends React.Component {
       currentlyShowing: [],
       currentSort: '',
       currentStars: [5, 4, 3, 2, 1],
-      sortingByStars: false
+      sortingByStars: false,
+      starArr: []
     }
 
     this.getReviews = this.getReviews.bind(this);
@@ -169,7 +180,18 @@ export default class App extends React.Component {
           averageWidth: avgWidth,
           averageComfort: avgComfort,
           averageQuality: avgQuality
-        })
+        }, () => {
+          var starArr = [];
+          for (var i = 0; i < this.state.averageStar; i++) {
+            starArr.push('filled');
+          }
+          for (var i = 5; i > this.state.averageStar; i--) {
+            starArr.push('unfilled');
+          }
+          this.setState({
+            starArr: starArr
+          });
+        });
       })
   }
 
@@ -556,10 +578,28 @@ export default class App extends React.Component {
               <div class="col-md-5">
                 <h1>{this.state.averageRating.toPrecision(2) || 0}</h1>
               </div>
-              <div class="col-md'7">
-              {/* <div class="gl-star-rating__item"><div class="gl-star-rating__mask"><svg class="gl-star-rating__star" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path class="gl-star-rating__fill" fill="currentColor" stroke="0" d="M13.277,6.182L9.697,8.782L11.057,12.992L7.487,10.392L3.907,12.992L5.277,8.782L1.697,6.182L6.117,6.182L7.487,1.992L8.857,6.182L13.277,6.182Z"></path></svg></div><svg class="gl-star-rating__star" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path class="gl-star-rating__outline" fill="none" stroke="currentColor" stroke-miterlimit="10" d="M13.277,6.182L9.697,8.782L11.057,12.992L7.487,10.392L3.907,12.992L5.277,8.782L1.697,6.182L6.117,6.182L7.487,1.992L8.857,6.182L13.277,6.182Z"></path></svg></div> */}
-                <div>{this.state.averageStar}</div>
-                <div>{this.state.reviewCount}</div>
+              <div class="col-md-7">
+
+                <div class="row">
+
+                {this.state.starArr.map((fillStatus, index) => {
+                  if (fillStatus === 'filled') {
+                    return (
+                      <Star>
+                      <svg class="gl-star-rating__star" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path class="gl-star-rating__fill" fill="currentColor" stroke="0" d="M13.277,6.182L9.697,8.782L11.057,12.992L7.487,10.392L3.907,12.992L5.277,8.782L1.697,6.182L6.117,6.182L7.487,1.992L8.857,6.182L13.277,6.182Z"></path></svg>
+                      </Star>
+                    )
+                  } else {
+                    return (
+                      <Star>
+                      <svg class="gl-star-rating__star" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path class="gl-star-rating__outline"  fill="none" stroke="currentColor" stroke-miterlimit="10" d="M13.277,6.182L9.697,8.782L11.057,12.992L7.487,10.392L3.907,12.992L5.277, 8.782L1.697,6.182L6.117,6.182L7.487,1.992L8.857,6.182L13.277,6.182Z"></path></svg>
+                      </Star>
+                    )
+                  }
+                })}
+
+                </div>
+                <div>{this.state.reviewCount} Reviews</div>
               </div>
             </div>
           </RatingOverview>
