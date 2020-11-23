@@ -3,6 +3,11 @@ import axios from 'axios';
 import styled, {css} from 'styled-components';
 import Review from './Review.jsx';
 
+const Container = styled.div `
+  margin-left: 30px;
+  margin-right: 30px;
+`;
+
 const StarButton = styled.button `
   border: none;
   background: white;
@@ -571,7 +576,8 @@ export default class App extends React.Component {
       )
     } else if (!this.state.sortingByStars) {
       return (
-        <div class="row">
+        <Container>
+          <div class="row">
           <div class="col-md-4">
           <h3>RATINGS AND REVIEWS</h3>
           <RatingOverview>
@@ -715,7 +721,8 @@ export default class App extends React.Component {
                 <BottomButton onClick={this.loadMore}>LOAD MORE</BottomButton>
                 <BottomButton>WRITE A REVIEW</BottomButton>
           </div>
-        </div>
+          </div>
+        </Container>
       )
     } else {
       return (
