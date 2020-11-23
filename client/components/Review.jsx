@@ -31,8 +31,6 @@ class Review extends React.Component {
       starArr.push('unfilled');
     }
 
-    console.log(starArr);
-
     return (
       <div>
         <div class="row">
