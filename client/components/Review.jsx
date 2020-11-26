@@ -2,22 +2,28 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const BlackBar = styled.hr `
-  border: 1px solid black;
+const BlackBar = styled.div `
+  border: .5px solid black;
+  background-color: black;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
 `;
 
 const Star = styled.div `
   display: inline;
-  width: 4%;
+  width: 2.5%;
 `;
 
 const Date = styled.div `
   position: absolute;
   right: 15px;
+  color: grey;
 `;
 
-const Title = styled.h5 `
+const Title = styled.h3 `
   margin-top: 5px;
+  text-transform: uppercase;
 `;
 
 const HelpfulButton = styled.button `
@@ -31,6 +37,14 @@ const HelpfulButton = styled.button `
     color: white;
   }
 `;
+
+const Count = styled.span `
+  color: grey;
+`;
+
+const Username = styled.h5 `
+width: 100%;
+`
 
 class Review extends React.Component {
   constructor(props) {
@@ -112,11 +126,13 @@ class Review extends React.Component {
 
         <Date>{this.props.review.date}</Date>
         </div>
-        <Title>{this.props.review.title}</Title>
-        <div>{this.props.review.text}</div>
-        <h5>{this.props.review.username}</h5>
-        <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton>({this.props.review.yesCount})  <HelpfulButton onClick={this.addNo}>No</HelpfulButton>({this.props.review.noCount})</div>
-        <BlackBar></BlackBar>
+        <div class="row">
+          <Title>{this.props.review.title}</Title>
+          <div>{this.props.review.text}</div>
+          <Username>{this.props.review.username}</Username>
+          <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton><Count>({this.props.review.yesCount})</Count>   <HelpfulButton onClick={this.addNo}>No</HelpfulButton><Count>({this.props.review.noCount})</Count></div>
+          <BlackBar></BlackBar>
+        </div>
       </div>
     )
     } else {
@@ -141,13 +157,15 @@ class Review extends React.Component {
 
         <Date>{this.props.review.date}</Date>
         </div>
-        <Title>{this.props.review.title}</Title>
-        <div>{this.props.review.text}</div>
-        <h5>{this.props.review.username}</h5>
-        <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton>({this.props.review.yesCount})  <HelpfulButton onClick={this.addNo}>No</HelpfulButton>({this.props.review.noCount})</div>
-        <br></br>
-        <div>Thank you! You have successfully submitted feedback for this review</div>
-        <BlackBar></BlackBar>
+        <div class="row">
+          <Title>{this.props.review.title}</Title>
+          <div>{this.props.review.text}</div>
+          <Username>{this.props.review.username}</Username>
+          <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton><Count>({this.props.review.yesCount})</Count>   <HelpfulButton onClick={this.addNo}>No</HelpfulButton><Count>({this.props.review.noCount})</Count></div>
+          <br></br>
+          <div>Thank you! You have successfully submitted feedback for this review</div>
+          <BlackBar></BlackBar>
+        </div>
       </div>
       )
     }

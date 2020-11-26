@@ -105,6 +105,7 @@ const TopButton = styled.button `
   width: 33%;
   background: white;
   display: block;
+  margin-bottom: 30px;
 `;
 
 const BottomButton = styled.button `
