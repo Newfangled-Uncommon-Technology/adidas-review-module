@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import styled, {css} from 'styled-components';
 import Review from './Review.jsx';
+import TopButtons from './TopButtons.jsx';
 
 const Container = styled.div `
 margin-left: 30px;
@@ -148,6 +149,18 @@ background-color: #2ada71;
 
 const FilledBar = styled(FilledReviewBar) `
   width: ${props => props.width};
+`;
+
+const Title = styled.h4 `
+  font-weight: bold;
+`;
+
+const Breakdown = styled.h5 `
+  font-weight: 800;
+`;
+
+const ReviewsContainer = styled.div `
+  width: 92%;
 `;
 
 export default class App extends React.Component {
@@ -621,7 +634,7 @@ export default class App extends React.Component {
         <Container>
           <div class="row">
           <div class="col-md-4">
-          <h3>RATINGS & REVIEWS</h3>
+          <Title>RATINGS & REVIEWS</Title>
           <RatingOverview>
             <div class="row">
               <div class="col-md-5">
@@ -656,7 +669,7 @@ export default class App extends React.Component {
               </div>
             </div>
           </RatingOverview>
-          <h4>RATING BREAKDOWN</h4>
+          <Breakdown>RATING BREAKDOWN</Breakdown>
             <div>
 
               <div class="row">
@@ -758,11 +771,7 @@ export default class App extends React.Component {
           </div>
 
           <div class="col-md-8">
-          <div class="row">
-              <TopButton onClick={this.sortByNewest}>NEWEST</TopButton>
-              <TopButton onClick={this.sortByHelpful}>HELPFUL</TopButton>
-              <TopButton onClick={this.  sortByRelevance}>RELEVANT</TopButton>
-          </div>
+              <TopButtons currentSort={this.state.currentSort} sortByNewest={this.sortByNewest} sortByHelpful={this.sortByHelpful} sortByRelevance={this.sortByRelevance} />
               <div className="reviews">
                 {this.state.currentlyShowing.map((reviewId, index) => {
                   var thisReview = {
@@ -793,7 +802,7 @@ export default class App extends React.Component {
         <div class="row">
 
           <div class="col-md-4">
-          <h3>RATINGS & REVIEWS</h3>
+          <Title>RATINGS & REVIEWS</Title>
           <RatingOverview>
             <div class="row">
               <div class="col-md-5">
@@ -827,7 +836,7 @@ export default class App extends React.Component {
               </div>
             </div>
           </RatingOverview>
-          <h4>RATING BREAKDOWN</h4>
+          <Breakdown>RATING BREAKDOWN</Breakdown>
             <div>
               Showing reviews: {this.state.currentStars.map((number, index) => {
               var onClick;
@@ -946,11 +955,7 @@ export default class App extends React.Component {
           </div>
 
           <div class="col-md-8">
-            <div class="row">
-              <TopButton onClick={this.sortByNewest}>NEWEST</TopButton>
-              <TopButton onClick={this.sortByHelpful}>HELPFUL</TopButton>
-              <TopButton onClick={this.  sortByRelevance}>RELEVANT</TopButton>
-            </div>
+          <TopButtons currentSort={this.state.currentSort} sortByNewest={this.sortByNewest} sortByHelpful={this.sortByHelpful} sortByRelevance={this.sortByRelevance} />
                 <div className="reviews">
                   {this.state.currentlyShowing.map((reviewId, index) => {
                     var thisReview = {

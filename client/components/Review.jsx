@@ -21,9 +21,10 @@ const Date = styled.div `
   color: grey;
 `;
 
-const Title = styled.h3 `
+const Title = styled.h4 `
   margin-top: 5px;
   text-transform: uppercase;
+  font-weight: bold;
 `;
 
 const HelpfulButton = styled.button `
@@ -44,6 +45,12 @@ const Count = styled.span `
 
 const Username = styled.h5 `
 width: 100%;
+margin-top: 8px;
+`;
+
+const Text = styled.div `
+  line-height: 140%;
+  font-weight: 400;
 `
 
 class Review extends React.Component {
@@ -128,7 +135,7 @@ class Review extends React.Component {
         </div>
         <div class="row">
           <Title>{this.props.review.title}</Title>
-          <div>{this.props.review.text}</div>
+          <Text>{this.props.review.text}</Text>
           <Username>{this.props.review.username}</Username>
           <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton><Count>({this.props.review.yesCount})</Count>   <HelpfulButton onClick={this.addNo}>No</HelpfulButton><Count>({this.props.review.noCount})</Count></div>
           <BlackBar></BlackBar>
@@ -159,7 +166,7 @@ class Review extends React.Component {
         </div>
         <div class="row">
           <Title>{this.props.review.title}</Title>
-          <div>{this.props.review.text}</div>
+          <Text>{this.props.review.text}</Text>
           <Username>{this.props.review.username}</Username>
           <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton><Count>({this.props.review.yesCount})</Count>   <HelpfulButton onClick={this.addNo}>No</HelpfulButton><Count>({this.props.review.noCount})</Count></div>
           <br></br>
