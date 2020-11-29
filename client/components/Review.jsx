@@ -43,9 +43,12 @@ const Count = styled.span `
   color: grey;
 `;
 
-const Username = styled.h5 `
+const Username = styled.div `
 width: 100%;
 margin-top: 8px;
+text-transform: uppercase;
+font-weight: bold;
+font-size: 15px;
 `;
 
 const Text = styled.div `

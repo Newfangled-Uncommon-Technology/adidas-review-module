@@ -10,6 +10,7 @@ const TopButton = styled.button `
   margin-bottom: 30px;
   color: grey;
   border-color: grey;
+  margin-top: 35px;
 `;
 
 const PrimaryButton = styled.button `
@@ -19,7 +20,8 @@ const PrimaryButton = styled.button `
   background: white;
   display: block;
   margin-bottom: 30px;
-  border-bottom: 3px solid black;
+  border-bottom: 4px solid black;
+  margin-top: 35px;
 `;
 
 class TopButtons extends React.Component {

@@ -5,8 +5,8 @@ import Review from './Review.jsx';
 import TopButtons from './TopButtons.jsx';
 
 const Container = styled.div `
-margin-left: 30px;
-margin-right: 30px;
+  margin-left: 43px;
+  margin-right: 43px;
   font-size: 13px;
   font-family: Helvetica;
 `;
@@ -30,8 +30,8 @@ const StarButton = styled.button `
 
 const RatingOverview = styled.div `
   background: #00cc66;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 27px;
+  padding-bottom: 27px;
   margin-bottom: 10px;
 `;
 
@@ -110,10 +110,13 @@ const TopButton = styled.button `
 `;
 
 const BottomButton = styled.button `
-  width: 50%;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  width: 45%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   background: white;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-weight: bold;
 `;
 
 const Star = styled.div `
@@ -162,6 +165,16 @@ const Breakdown = styled.h5 `
 const ReviewsContainer = styled.div `
   width: 92%;
 `;
+
+const LeftText = styled.span `
+  position: absolute;
+  left: 40px;
+`;
+
+const RightText = styled.span `
+  position: absoulte;
+  right: 40px;
+`
 
 export default class App extends React.Component {
   constructor() {
@@ -790,7 +803,11 @@ export default class App extends React.Component {
                   )
                 })}
               </div>
-                <BottomButton onClick={this.loadMore}>LOAD MORE</BottomButton>
+                <BottomButton onClick={this.loadMore}><LeftText>LOAD MORE</LeftText><svg height="25" width="250">
+                  <path d="M200 10  L225 10 L225 12 L200 12 Z M225 10 L220 5 L219 7 L223 10 Z M225 12 L220 17 L219 15 L223 12 Z" />
+                  Sorry, your browser does not support inline SVG.
+                  </svg>
+                </BottomButton>
                 <BottomButton>WRITE A REVIEW</BottomButton>
           </div>
           </div>
@@ -973,7 +990,11 @@ export default class App extends React.Component {
                     )
                   })}
             </div>
-              <BottomButton onClick={this.loadMore}>LOAD MORE</BottomButton>
+            <BottomButton onClick={this.loadMore}><LeftText>LOAD MORE</LeftText><svg height="25" width="250">
+                <path d="M200 10  L225 10 L225 12 L200 12 Z M225 10 L220 5 L219 7 L223 10 Z M225 12 L220 17 L219 15 L223 12 Z" />
+                Sorry, your browser does not support inline SVG.
+                </svg>
+              </BottomButton>
               <BottomButton>WRITE A REVIEW</BottomButton>
           </div>
         </div>
