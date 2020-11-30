@@ -54,7 +54,11 @@ font-size: 15px;
 const Text = styled.div `
   line-height: 140%;
   font-weight: 400;
-`
+`;
+
+const ThankYou = styled.div `
+  margin-top: 10px;
+`;
 
 class Review extends React.Component {
   constructor(props) {
@@ -173,7 +177,7 @@ class Review extends React.Component {
           <Username>{this.props.review.username}</Username>
           <div>Was this review Helpful? <HelpfulButton onClick={this.addYes}>Yes</HelpfulButton><Count>({this.props.review.yesCount})</Count>   <HelpfulButton onClick={this.addNo}>No</HelpfulButton><Count>({this.props.review.noCount})</Count></div>
           <br></br>
-          <div>Thank you! You have successfully submitted feedback for this review</div>
+          <ThankYou>Thank you! You have successfully submitted feedback for this review</ThankYou>
           <BlackBar></BlackBar>
         </div>
       </div>

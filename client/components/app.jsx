@@ -119,6 +119,16 @@ const BottomButton = styled.button `
   font-weight: bold;
 `;
 
+const FunkyButton = styled.button `
+  width: 45%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: white;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+`;
+
 const Star = styled.div `
   display: inline;
   width: 12%;
@@ -154,8 +164,9 @@ const FilledBar = styled(FilledReviewBar) `
   width: ${props => props.width};
 `;
 
-const Title = styled.h4 `
+const Title = styled.div `
   font-weight: bold;
+  font-size: 26.2px;
 `;
 
 const Breakdown = styled.h5 `
@@ -808,7 +819,7 @@ export default class App extends React.Component {
                   Sorry, your browser does not support inline SVG.
                   </svg>
                 </BottomButton>
-                <BottomButton>WRITE A REVIEW</BottomButton>
+                <FunkyButton>WRITE A REVIEW</FunkyButton>
           </div>
           </div>
         </Container>
@@ -995,7 +1006,7 @@ export default class App extends React.Component {
                 Sorry, your browser does not support inline SVG.
                 </svg>
               </BottomButton>
-              <BottomButton>WRITE A REVIEW</BottomButton>
+              <FunkyButton>WRITE A REVIEW</FunkyButton>
           </div>
         </div>
         </Container>
