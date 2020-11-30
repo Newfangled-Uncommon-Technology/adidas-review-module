@@ -123,10 +123,20 @@ const FunkyButton = styled.button `
   width: 45%;
   padding-top: 10px;
   padding-bottom: 10px;
-  background: white;
+  background: black;
+  color: white;
   margin-right: 10px;
   margin-left: 10px;
   font-weight: bold;
+  &:after {
+    content: '';
+    color: black;
+    position: absolute;
+    left: 51%;
+    border: 1px solid black;
+    height: 40px;
+    width: 42.5%;
+  }
 `;
 
 const Star = styled.div `
@@ -185,7 +195,12 @@ const LeftText = styled.span `
 const RightText = styled.span `
   position: absoulte;
   right: 40px;
-`
+`;
+
+const FunkyButtonText = styled.span `
+  position: relative;
+  left: -10px;
+`;
 
 export default class App extends React.Component {
   constructor() {
@@ -819,7 +834,11 @@ export default class App extends React.Component {
                   Sorry, your browser does not support inline SVG.
                   </svg>
                 </BottomButton>
-                <FunkyButton>WRITE A REVIEW</FunkyButton>
+                  <FunkyButton><FunkyButtonText>WRITE A REVIEW</FunkyButtonText> <svg height="25" width="110" fill="white">
+                    <path d="M80 10  L105 10 L105 12 L80 12 Z M105 10 L100 5 L99 7 L103 10 Z M105 12 L100 17 L99 15 L103 12 Z" />
+                    Sorry, your browser does not support inline SVG.
+                    </svg>
+                  </FunkyButton>
           </div>
           </div>
         </Container>
@@ -1006,7 +1025,11 @@ export default class App extends React.Component {
                 Sorry, your browser does not support inline SVG.
                 </svg>
               </BottomButton>
-              <FunkyButton>WRITE A REVIEW</FunkyButton>
+              <FunkyButton><FunkyButtonText>WRITE A REVIEW</FunkyButtonText> <svg height="25" width="110" fill="white">
+                  <path d="M80 10  L105 10 L105 12 L80 12 Z M105 10 L100 5 L99 7 L103 10 Z M105 12 L100 17 L99 15 L103 12 Z" />
+                  Sorry, your browser does not support inline SVG.
+                  </svg>
+              </FunkyButton>
           </div>
         </div>
         </Container>
